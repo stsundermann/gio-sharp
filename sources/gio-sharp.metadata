@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<metadata>
+	<attr path="/api/namespace" name="library">libgio-2.0-0.dll</attr>
+	<attr path="//*[@type='const gchar* const*']" name="type">gchar**</attr>
+	<attr path="/api/namespace/object[@name='Global']/method[@cname='g_initable_newv']/parameters/parameter[@name='parameters']" name="array">false</attr>
+	<attr path="/api/namespace/interface[@cname='GInitable']/method[@cname='g_initable_newv']/parameters/parameter[@name='parameters']" name="array">false</attr>
+	<attr path="/api/namespace//interface[@cname='GAppInfo' or @cname='GFile' or @cname='GIcon' or @cname='GMount' or @cname='GSeekable' or @cname='GVolume' or @cname='GDrive']" name="consume_only">true</attr>
+	<attr path="/api/namespace/interface[@cname='GTlsClientConnection']/method[@cname='g_tls_client_connection_get_accepted_cas']" name="element_type">GByteArray*</attr>
+	<attr path="/api/namespace/interface[@cname='GTlsClientConnection']/method[@cname='g_tls_client_connection_get_accepted_cas']" name="elements_owned">true</attr>
+	<attr path="/api/namespace/interface[@cname='GFile']/method[@name='GetParseName']" name="name">GetParsedName</attr>
+	<attr path="/api/namespace/interface[@cname='GFile']/method[@cname='g_file_load_contents']/parameters/parameter[@name='contents']" name="array">false</attr>
+	<attr path="/api/namespace/interface[@cname='GFile']/method[@cname='g_file_load_contents_finish']/parameters/parameter[@name='contents']" name="array">false</attr>
+	<attr path="/api/namespace/interface[@cname='GFile']/method[@cname='g_file_load_partial_contents_finish']/parameters/parameter[@name='contents']" name="array">false</attr>
+	<attr path="/api/namespace//callback[@cname='GDBusInterfaceSetPropertyFunc' or @cname='GDBusInterfaceGetPropertyFunc']/parameters" name="throws">true</attr>
+	<attr path="/api/namespace/object[@cname='GDBusConnection']/method[@cname='g_dbus_connection_is_closed']" name="name">GetIsClosed</attr>
+	<attr path="/api/namespace/object[@cname='GDBusConnection']/property[@cname='closed']" name="name">IsClosed</attr>
+	<attr path="/api/namespace/object[@cname='GDBusConnection']/method[@cname='g_dbus_connection_send_message_with_reply']/parameters//parameter" name="allow-none">false</attr>
+	<attr path="/api/namespace/struct[@cname='GIOSchedulerJob']/method[@cname='g_io_scheduler_job_send_to_mainloop']/parameters//parameter" name="allow-none">false</attr>
+	<attr path="/api/namespace/struct[@cname='GIOSchedulerJob']/method[@cname='g_io_scheduler_job_send_to_mainloop_async']/parameters//parameter" name="allow-none">false</attr>
+	<attr path="/api/namespace/interface[@cname='GAction']/property[@cname='enabled']" name="hidden">1</attr>
+	<attr path="/api/namespace/interface[@cname='GAction']/property[@cname='name']" name="hidden">1</attr>
+	<attr path="/api/namespace/interface[@cname='GAction']/property[@cname='parameter-type']" name="hidden">1</attr>
+	<attr path="/api/namespace/interface[@cname='GAction']/property[@cname='state']" name="hidden">1</attr>
+	<attr path="/api/namespace/interface[@cname='GAction']/property[@cname='state-type']" name="hidden">1</attr>
+	<attr path="/api/namespace/interface[@cname='GVolume']/method[@name='GetMount']" name="name">GetMountInstance</attr>
+	<attr path="/api/namespace/object[@cname='GSimpleAction']/signal[@cname='activate']" name="name">Activated</attr>
+	<attr path="/api/namespace/object[@cname='GSimpleAction']/signal[@cname='change-state']" name="name">StateChanged</attr>
+	<attr path="/api/namespace/object[@cname='GDBusObjectSkeleton']/method[@cname='g_dbus_object_skeleton_set_object_path']" name="hidden">true</attr>
+	<attr path="/api/namespace/object[@cname='GDBusMessage']/method[@cname='g_dbus_message_get_header_fields']/return-type" name="type">gchar**</attr>
+	<attr path="/api/namespace/object[@cname='GSimpleAction']/property[@cname='state']" name="readable">false</attr>
+	<attr path="/api/namespace/object[@name='TlsCertificate']" name="abstract">false</attr>
+	<attr path="/api/namespace/object[@name='TlsCertificate']" name="defaultconstructoraccess">protected</attr>
+	<attr path="/api/namespace/object[@cname='GDBusObjectManagerClient']/signal[@cname='interface-proxy-properties-changed']/parameters/parameter[@name='invalidated_properties']" name="type">GStrv</attr>
+	<attr path="/api/namespace/object[@cname='GDBusProxy']/signal[@cname='g-properties-changed']/parameters/parameter[@name='invalidated_properties']" name="type">GStrv</attr>	
+	<attr path="/api/namespace/object[@cname='GMountOperation']/signal[@cname='ask-question']/parameters/parameter[@name='choices']" name="type">char*</attr>
+	<attr path="/api/namespace/object[@cname='GMountOperation']/signal[@cname='show-processes']/parameters/parameter[@name='processes']" name="type">GArray*</attr>
+	<attr path="/api/namespace/object[@cname='GMountOperation']/signal[@cname='show-processes']/parameters/parameter[@name='choices']" name="type">GStrv</attr>
+	<attr path="/api/namespace/object[@cname='GSettings']/signal[@cname='change-event']/parameters/parameter[@name='keys']" name="type">GQuark*</attr>
+	<remove-attr path="/api/namespace/object[@cname='GDesktopAppInfo']/method[@cname='g_desktop_app_info_launch_uris_as_manager']/parameters//parameter" name="closure" />
+	<remove-attr path="/api/namespace/object[@cname='GApplication']/virtual_method[@cname='local_command_line']/parameters/parameter[@name='arguments']" name="pass_as" />
+	<remove-node path="/api/namespace/object[@cname='GIOModule']/implements" />
+	<remove-node path="/api/namespace/interface[@cname='GTlsBackend']" />
+	<remove-node path="/api/namespace/interface[@cname='GTlsFileDatabase']/property[@cname='anchors']" />
+	<remove-node path="/api/namespace/interface[@cname='GTlsServerConnection']/property[@cname='authentication-mode']" />
+</metadata>
