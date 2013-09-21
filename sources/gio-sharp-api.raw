@@ -195,6 +195,7 @@
       <member cname="G_IO_ERROR_PROXY_AUTH_FAILED" name="ProxyAuthFailed" value="41"/>
       <member cname="G_IO_ERROR_PROXY_NEED_AUTH" name="ProxyNeedAuth" value="42"/>
       <member cname="G_IO_ERROR_PROXY_NOT_ALLOWED" name="ProxyNotAllowed" value="43"/>
+      <member cname="G_IO_ERROR_BROKEN_PIPE" name="BrokenPipe" value="44"/>
     </enum>
     <enum name="IOModuleScopeFlags" cname="GIOModuleScopeFlags" type="enum" gtype="g_io_module_scope_flags_get_type">
       <member cname="G_IO_MODULE_SCOPE_NONE" name="None" value="0"/>
@@ -416,6 +417,7 @@
       <member cname="G_FILE_MONITOR_NONE" name="None" value="0"/>
       <member cname="G_FILE_MONITOR_WATCH_MOUNTS" name="WatchMounts" value="1"/>
       <member cname="G_FILE_MONITOR_SEND_MOVED" name="SendMoved" value="2"/>
+      <member cname="G_FILE_MONITOR_WATCH_HARD_LINKS" name="WatchHardLinks" value="4"/>
     </enum>
     <enum name="FileQueryInfoFlags" cname="GFileQueryInfoFlags" type="flags" gtype="g_file_query_info_flags_get_type">
       <member cname="G_FILE_QUERY_INFO_NONE" name="None" value="0"/>
@@ -487,7 +489,7 @@
       <parameters>
         <parameter name="source_object" type="GObject*"/>
         <parameter name="res" type="GAsyncResult*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="BusAcquiredCallback" cname="GBusAcquiredCallback">
@@ -495,7 +497,7 @@
       <parameters>
         <parameter name="connection" type="GDBusConnection*"/>
         <parameter name="name" type="const-gchar*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="BusNameAcquiredCallback" cname="GBusNameAcquiredCallback">
@@ -503,7 +505,7 @@
       <parameters>
         <parameter name="connection" type="GDBusConnection*"/>
         <parameter name="name" type="const-gchar*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="BusNameAppearedCallback" cname="GBusNameAppearedCallback">
@@ -512,7 +514,7 @@
         <parameter name="connection" type="GDBusConnection*"/>
         <parameter name="name" type="const-gchar*"/>
         <parameter name="name_owner" type="const-gchar*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="3" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="BusNameLostCallback" cname="GBusNameLostCallback">
@@ -520,7 +522,7 @@
       <parameters>
         <parameter name="connection" type="GDBusConnection*"/>
         <parameter name="name" type="const-gchar*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="BusNameVanishedCallback" cname="GBusNameVanishedCallback">
@@ -528,14 +530,14 @@
       <parameters>
         <parameter name="connection" type="GDBusConnection*"/>
         <parameter name="name" type="const-gchar*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="CancellableSourceFunc" cname="GCancellableSourceFunc">
       <return-type type="gboolean"/>
       <parameters>
         <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="1" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="DBusInterfaceGetPropertyFunc" cname="GDBusInterfaceGetPropertyFunc">
@@ -551,7 +553,7 @@
         <parameter name="error" type="GError**">
           <warning>missing glib:type-name</warning>
         </parameter>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="6" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="DBusInterfaceMethodCallFunc" cname="GDBusInterfaceMethodCallFunc">
@@ -566,7 +568,7 @@
           <warning>missing glib:type-name</warning>
         </parameter>
         <parameter name="invocation" type="GDBusMethodInvocation*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="7" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="DBusInterfaceSetPropertyFunc" cname="GDBusInterfaceSetPropertyFunc">
@@ -583,7 +585,7 @@
         <parameter name="error" type="GError**">
           <warning>missing glib:type-name</warning>
         </parameter>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="7" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="DBusMessageFilterFunction" cname="GDBusMessageFilterFunction">
@@ -592,7 +594,7 @@
         <parameter name="connection" type="GDBusConnection*"/>
         <parameter name="message" type="GDBusMessage*" owned="true"/>
         <parameter name="incoming" type="gboolean"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="3" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="DBusProxyTypeFunc" cname="GDBusProxyTypeFunc">
@@ -601,7 +603,7 @@
         <parameter name="manager" type="GDBusObjectManagerClient*"/>
         <parameter name="object_path" type="const-gchar*"/>
         <parameter allow-none="1" name="interface_name" type="const-gchar*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="3" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="DBusSignalCallback" cname="GDBusSignalCallback">
@@ -615,7 +617,7 @@
         <parameter name="parameters" type="GVariant*">
           <warning>missing glib:type-name</warning>
         </parameter>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="6" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="DBusSubtreeDispatchFunc" cname="GDBusSubtreeDispatchFunc">
@@ -629,7 +631,7 @@
         <parameter name="interface_name" type="const-gchar*"/>
         <parameter name="node" type="const-gchar*"/>
         <parameter name="out_user_data" type="gpointer"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="6" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback hidden="0" name="DBusSubtreeEnumerateFunc" cname="GDBusSubtreeEnumerateFunc">
@@ -638,7 +640,7 @@
         <parameter name="connection" type="GDBusConnection*"/>
         <parameter name="sender" type="const-gchar*"/>
         <parameter name="object_path" type="const-gchar*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="3" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="DBusSubtreeIntrospectFunc" cname="GDBusSubtreeIntrospectFunc">
@@ -650,7 +652,7 @@
         <parameter name="sender" type="const-gchar*"/>
         <parameter name="object_path" type="const-gchar*"/>
         <parameter name="node" type="const-gchar*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="4" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="DesktopAppLaunchCallback" cname="GDesktopAppLaunchCallback">
@@ -658,7 +660,7 @@
       <parameters>
         <parameter name="appinfo" type="GDesktopAppInfo*"/>
         <parameter name="pid" type="int"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="FileProgressCallback" cname="GFileProgressCallback">
@@ -666,7 +668,7 @@
       <parameters>
         <parameter name="current_num_bytes" type="gint64"/>
         <parameter name="total_num_bytes" type="gint64"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="FileReadMoreCallback" cname="GFileReadMoreCallback">
@@ -684,14 +686,14 @@
           <warning>missing glib:type-name</warning>
         </parameter>
         <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="PollableSourceFunc" cname="GPollableSourceFunc">
       <return-type type="gboolean"/>
       <parameters>
         <parameter name="pollable_stream" type="GObject*"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="1" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback hidden="0" name="ReallocFunc" cname="GReallocFunc">
@@ -710,7 +712,7 @@
         <parameter name="variant" type="GVariant*">
           <warning>missing glib:type-name</warning>
         </parameter>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="SettingsBindSetMapping" cname="GSettingsBindSetMapping">
@@ -724,7 +726,7 @@
         <parameter name="expected_type" type="GVariantType*">
           <warning>missing glib:type-name</warning>
         </parameter>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="SettingsGetMapping" cname="GSettingsGetMapping">
@@ -734,7 +736,7 @@
           <warning>missing glib:type-name</warning>
         </parameter>
         <parameter name="_result" type="gpointer*" owned="true" pass_as="out"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
       </parameters>
     </callback>
     <callback name="SimpleAsyncThreadFunc" cname="GSimpleAsyncThreadFunc">
@@ -750,7 +752,16 @@
       <parameters>
         <parameter name="socket" type="GSocket*"/>
         <parameter name="condition" type="GIOCondition"/>
-        <parameter name="user_data" type="gpointer"/>
+        <parameter closure="2" name="user_data" type="gpointer"/>
+      </parameters>
+    </callback>
+    <callback name="TaskThreadFunc" cname="GTaskThreadFunc">
+      <return-type type="void"/>
+      <parameters>
+        <parameter name="task" type="GTask*"/>
+        <parameter name="source_object" type="GObject*"/>
+        <parameter name="task_data" type="gpointer"/>
+        <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
       </parameters>
     </callback>
     <interface name="Action" cname="GAction" abstract="false" opaque="false" hidden="false">
@@ -788,29 +799,35 @@
       </virtual_method>
       <virtual_method name="GetEnabled" cname="get_enabled">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetName" cname="get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetParameterType" cname="get_parameter_type">
         <return-type type="GVariantType*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetState" cname="get_state">
         <return-type type="GVariant*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetStateHint" cname="get_state_hint">
         <return-type type="GVariant*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetStateType" cname="get_state_type">
         <return-type type="GVariantType*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </virtual_method>
       <method name="Activate" cname="g_action_activate">
         <return-type type="void"/>
@@ -830,29 +847,35 @@
       </method>
       <method name="GetEnabled" cname="g_action_get_enabled">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetName" cname="g_action_get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetParameterType" cname="g_action_get_parameter_type">
         <return-type type="GVariantType*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetState" cname="g_action_get_state">
         <return-type type="GVariant*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetStateHint" cname="g_action_get_state_hint">
         <return-type type="GVariant*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetStateType" cname="g_action_get_state_type">
         <return-type type="GVariantType*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <property name="Enabled" cname="enabled" type="gboolean" readable="true" writeable="false" construct="false" construct-only="false"/>
       <property name="Name" cname="name" type="gchar*" readable="true" writeable="false" construct="false" construct-only="false"/>
@@ -947,6 +970,7 @@
       </virtual_method>
       <virtual_method name="ListActions" cname="list_actions">
         <return-type type="gchar***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="QueryAction" cname="query_action">
         <return-type type="gboolean"/>
@@ -1031,6 +1055,7 @@
       </method>
       <method name="ListActions" cname="g_action_group_list_actions">
         <return-type type="gchar***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="QueryAction" cname="g_action_group_query_action">
         <return-type type="gboolean"/>
@@ -1119,9 +1144,7 @@
       <method name="AddActionEntries" cname="g_action_map_add_action_entries">
         <return-type type="void"/>
         <parameters>
-          <parameter name="entries" type="GActionEntry*">
-            <warning>missing glib:type-name</warning>
-          </parameter>
+          <parameter name="entries" type="GActionEntry*" array="true" array_length_param_index="1"/>
           <parameter name="n_entries" type="gint"/>
           <parameter name="user_data" type="gpointer"/>
         </parameters>
@@ -1237,15 +1260,19 @@
       </virtual_method>
       <virtual_method name="CanDelete" cname="can_delete">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanRemoveSupportsType" cname="can_remove_supports_type">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="DoDelete" cname="do_delete">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="Dup" cname="dup">
         <return-type type="GAppInfo*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="Equal" cname="equal">
         <return-type type="gboolean"/>
@@ -1255,27 +1282,35 @@
       </virtual_method>
       <virtual_method name="GetCommandline" cname="get_commandline">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetDescription" cname="get_description">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetDisplayName" cname="get_display_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetExecutable" cname="get_executable">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetIcon" cname="get_icon">
         <return-type type="GIcon*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetId" cname="get_id">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetName" cname="get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetSupportedTypes" cname="get_supported_types">
         <return-type type="char**" array="true" null_term_array="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="Launch" cname="launch">
         <return-type type="gboolean"/>
@@ -1323,12 +1358,15 @@
       </virtual_method>
       <virtual_method name="ShouldShow" cname="should_show">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="SupportsFiles" cname="supports_files">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="SupportsUris" cname="supports_uris">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <method name="AddSupportsType" cname="g_app_info_add_supports_type">
         <return-type type="gboolean"/>
@@ -1339,15 +1377,19 @@
       </method>
       <method name="CanDelete" cname="g_app_info_can_delete">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CanRemoveSupportsType" cname="g_app_info_can_remove_supports_type">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Delete" cname="g_app_info_delete">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Dup" cname="g_app_info_dup">
         <return-type type="GAppInfo*" owned="true"/>
+        <parameters/>
       </method>
       <method name="Equal" cname="g_app_info_equal">
         <return-type type="gboolean"/>
@@ -1357,27 +1399,35 @@
       </method>
       <method name="GetCommandline" cname="g_app_info_get_commandline">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetDescription" cname="g_app_info_get_description">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetDisplayName" cname="g_app_info_get_display_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetExecutable" cname="g_app_info_get_executable">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetIcon" cname="g_app_info_get_icon">
         <return-type type="GIcon*"/>
+        <parameters/>
       </method>
       <method name="GetId" cname="g_app_info_get_id">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetName" cname="g_app_info_get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetSupportedTypes" cname="g_app_info_get_supported_types">
         <return-type type="char**" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="Launch" cname="g_app_info_launch">
         <return-type type="gboolean"/>
@@ -1425,12 +1475,15 @@
       </method>
       <method name="ShouldShow" cname="g_app_info_should_show">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="SupportsFiles" cname="g_app_info_supports_files">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="SupportsUris" cname="g_app_info_supports_uris">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
     </interface>
     <interface name="AsyncInitable" cname="GAsyncInitable" abstract="false" opaque="false" hidden="false">
@@ -1512,21 +1565,25 @@
       </method>
       <virtual_method name="GetSourceObject" cname="get_source_object">
         <return-type type="GObject*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetUserData" cname="get_user_data">
         <return-type type="gpointer*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="IsTagged" cname="is_tagged">
         <return-type type="gboolean"/>
         <parameters>
-          <parameter name="tag" type="gpointer"/>
+          <parameter name="source_tag" type="gpointer"/>
         </parameters>
       </virtual_method>
       <method name="GetSourceObject" cname="g_async_result_get_source_object">
         <return-type type="GObject*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetUserData" cname="g_async_result_get_user_data">
         <return-type type="gpointer*" owned="true"/>
+        <parameters/>
       </method>
       <method name="IsTagged" cname="g_async_result_is_tagged">
         <return-type type="gboolean"/>
@@ -1536,6 +1593,9 @@
       </method>
       <method name="LegacyPropagateError" cname="g_async_result_legacy_propagate_error">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
     </interface>
     <interface name="Converter" cname="GConverter" abstract="false" opaque="false" hidden="false">
@@ -1564,6 +1624,7 @@
       </virtual_method>
       <virtual_method name="Reset" cname="reset">
         <return-type type="void"/>
+        <parameters/>
       </virtual_method>
       <method name="Convert" cname="g_converter_convert">
         <return-type type="GConverterResult"/>
@@ -1580,6 +1641,7 @@
       </method>
       <method name="Reset" cname="g_converter_reset">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </interface>
     <interface name="DBusInterface" cname="GDBusInterface" abstract="false" opaque="false" hidden="false">
@@ -1597,14 +1659,17 @@
       </method>
       <virtual_method name="DupObject" cname="dup_object">
         <return-type type="GDBusObject*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetInfo" cname="get_info">
         <return-type type="GDBusInterfaceInfo*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetObject" cname="get_object" hidden="true">
         <return-type type="GDBusObject*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="SetObject" cname="set_object">
         <return-type type="void"/>
@@ -1614,11 +1679,13 @@
       </virtual_method>
       <method name="DupObject" cname="g_dbus_interface_dup_object">
         <return-type type="GDBusObject*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetInfo" cname="g_dbus_interface_get_info">
         <return-type type="GDBusInterfaceInfo*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="SetObject" cname="g_dbus_interface_set_object">
         <return-type type="void"/>
@@ -1649,9 +1716,11 @@
       </virtual_method>
       <virtual_method name="GetInterfaces" cname="get_interfaces">
         <return-type type="GList*" element_type="GDBusInterface*" elements_owned="true" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetObjectPath" cname="get_object_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <method name="GetInterface" cname="g_dbus_object_get_interface">
         <return-type type="GDBusInterface*" owned="true"/>
@@ -1661,9 +1730,11 @@
       </method>
       <method name="GetInterfaces" cname="g_dbus_object_get_interfaces">
         <return-type type="GList*" element_type="GDBusInterface*" elements_owned="true" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetObjectPath" cname="g_dbus_object_get_object_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <signal name="InterfaceAdded" cname="interface-added" when="last" field_name="interface_added">
         <return-type type="void"/>
@@ -1710,9 +1781,11 @@
       </virtual_method>
       <virtual_method name="GetObjectPath" cname="get_object_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetObjects" cname="get_objects">
         <return-type type="GList*" element_type="GDBusObject*" elements_owned="true" owned="true"/>
+        <parameters/>
       </virtual_method>
       <method name="GetInterface" cname="g_dbus_object_manager_get_interface">
         <return-type type="GDBusInterface*" owned="true"/>
@@ -1729,9 +1802,11 @@
       </method>
       <method name="GetObjectPath" cname="g_dbus_object_manager_get_object_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetObjects" cname="g_dbus_object_manager_get_objects">
         <return-type type="GList*" element_type="GDBusObject*" elements_owned="true" owned="true"/>
+        <parameters/>
       </method>
       <signal name="InterfaceAdded" cname="interface-added" when="last" field_name="interface_added">
         <return-type type="void"/>
@@ -1825,18 +1900,23 @@
       </method>
       <virtual_method name="CanEject" cname="can_eject">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanPollForMedia" cname="can_poll_for_media">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanStart" cname="can_start">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanStartDegraded" cname="can_start_degraded">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanStop" cname="can_stop">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="Eject" cname="eject" deprecated="true">
         <return-type type="void"/>
@@ -1873,9 +1953,11 @@
       </virtual_method>
       <virtual_method name="EnumerateIdentifiers" cname="enumerate_identifiers">
         <return-type type="char***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetIcon" cname="get_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetIdentifier" cname="get_identifier">
         <return-type type="gchar*" owned="true"/>
@@ -1885,30 +1967,39 @@
       </virtual_method>
       <virtual_method name="GetName" cname="get_name">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetSortKey" cname="get_sort_key">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetStartStopType" cname="get_start_stop_type">
         <return-type type="GDriveStartStopType"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetSymbolicIcon" cname="get_symbolic_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetVolumes" cname="get_volumes">
         <return-type type="GList*" element_type="GVolume*" elements_owned="true" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="HasMedia" cname="has_media">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="HasVolumes" cname="has_volumes">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="IsMediaCheckAutomatic" cname="is_media_check_automatic">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="IsMediaRemovable" cname="is_media_removable">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="PollForMedia" cname="poll_for_media">
         <return-type type="void"/>
@@ -1961,18 +2052,23 @@
       </virtual_method>
       <method name="CanEject" cname="g_drive_can_eject">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CanPollForMedia" cname="g_drive_can_poll_for_media">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CanStart" cname="g_drive_can_start">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CanStartDegraded" cname="g_drive_can_start_degraded">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CanStop" cname="g_drive_can_stop">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Eject" cname="g_drive_eject" deprecated="true">
         <return-type type="void"/>
@@ -2009,9 +2105,11 @@
       </method>
       <method name="EnumerateIdentifiers" cname="g_drive_enumerate_identifiers">
         <return-type type="char***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="GetIcon" cname="g_drive_get_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetIdentifier" cname="g_drive_get_identifier">
         <return-type type="gchar*" owned="true"/>
@@ -2021,30 +2119,39 @@
       </method>
       <method name="GetName" cname="g_drive_get_name">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetSortKey" cname="g_drive_get_sort_key">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetStartStopType" cname="g_drive_get_start_stop_type">
         <return-type type="GDriveStartStopType"/>
+        <parameters/>
       </method>
       <method name="GetSymbolicIcon" cname="g_drive_get_symbolic_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetVolumes" cname="g_drive_get_volumes">
         <return-type type="GList*" element_type="GVolume*" elements_owned="true" owned="true"/>
+        <parameters/>
       </method>
       <method name="HasMedia" cname="g_drive_has_media">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="HasVolumes" cname="g_drive_has_volumes">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsMediaCheckAutomatic" cname="g_drive_is_media_check_automatic">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsMediaRemovable" cname="g_drive_is_media_removable">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="PollForMedia" cname="g_drive_poll_for_media">
         <return-type type="void"/>
@@ -2263,6 +2370,13 @@
           <parameter name="arg" type="const-gchar*"/>
         </parameters>
       </method>
+      <method name="NewForCommandlineArgAndCwd" cname="g_file_new_for_commandline_arg_and_cwd" shared="true">
+        <return-type type="GFile*" owned="true"/>
+        <parameters>
+          <parameter name="arg" type="const-gchar*"/>
+          <parameter name="cwd" type="const-gchar*"/>
+        </parameters>
+      </method>
       <method name="NewForPath" cname="g_file_new_for_path" shared="true">
         <return-type type="GFile*" owned="true"/>
         <parameters>
@@ -2420,6 +2534,7 @@
       </virtual_method>
       <virtual_method name="Dup" cname="dup">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="EjectMountable" cname="eject_mountable" deprecated="true">
         <return-type type="void"/>
@@ -2512,6 +2627,7 @@
       </virtual_method>
       <virtual_method name="GetBasename" cname="get_basename">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetChildForDisplayName" cname="get_child_for_display_name">
         <return-type type="GFile*" owned="true"/>
@@ -2522,12 +2638,15 @@
       </virtual_method>
       <virtual_method name="GetParent" cname="get_parent">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetParseName" cname="get_parse_name">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetPath" cname="get_path">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetRelativePath" cname="get_relative_path">
         <return-type type="gchar*" owned="true"/>
@@ -2537,9 +2656,11 @@
       </virtual_method>
       <virtual_method name="GetUri" cname="get_uri">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetUriScheme" cname="get_uri_scheme">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="HasUriScheme" cname="has_uri_scheme">
         <return-type type="gboolean"/>
@@ -2549,9 +2670,11 @@
       </virtual_method>
       <virtual_method name="Hash" cname="hash">
         <return-type type="guint"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="IsNative" cname="is_native">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="MakeDirectory" cname="make_directory">
         <return-type type="gboolean"/>
@@ -3095,6 +3218,7 @@
       </method>
       <method name="Dup" cname="g_file_dup">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </method>
       <method name="EjectMountable" cname="g_file_eject_mountable" deprecated="true">
         <return-type type="void"/>
@@ -3187,6 +3311,7 @@
       </method>
       <method name="GetBasename" cname="g_file_get_basename">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetChild" cname="g_file_get_child">
         <return-type type="GFile*" owned="true"/>
@@ -3203,12 +3328,15 @@
       </method>
       <method name="GetParent" cname="g_file_get_parent">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetParseName" cname="g_file_get_parse_name">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetPath" cname="g_file_get_path">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetRelativePath" cname="g_file_get_relative_path">
         <return-type type="gchar*" owned="true"/>
@@ -3218,9 +3346,11 @@
       </method>
       <method name="GetUri" cname="g_file_get_uri">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetUriScheme" cname="g_file_get_uri_scheme">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="HasParent" cname="g_file_has_parent">
         <return-type type="gboolean"/>
@@ -3242,9 +3372,11 @@
       </method>
       <method name="Hash" cname="g_file_hash">
         <return-type type="guint"/>
+        <parameters/>
       </method>
       <method name="IsNative" cname="g_file_is_native">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="LoadContents" cname="g_file_load_contents">
         <return-type type="gboolean"/>
@@ -3784,6 +3916,7 @@
       </method>
       <method name="SupportsThreadContexts" cname="g_file_supports_thread_contexts">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Trash" cname="g_file_trash">
         <return-type type="gboolean"/>
@@ -3838,9 +3971,11 @@
       </method>
       <virtual_method name="GetFd" cname="get_fd">
         <return-type type="gint"/>
+        <parameters/>
       </virtual_method>
       <method name="GetFd" cname="g_file_descriptor_based_get_fd">
         <return-type type="gint"/>
+        <parameters/>
       </method>
     </interface>
     <interface name="Icon" cname="GIcon" abstract="false" opaque="false" hidden="false">
@@ -3886,8 +4021,9 @@
       </virtual_method>
       <virtual_method name="Hash" cname="hash">
         <return-type type="guint"/>
+        <parameters/>
       </virtual_method>
-      <virtual_method name="ToTokens" cname="to_tokens">
+      <virtual_method name="ToTokens" cname="to_tokens" hidden="true">
         <return-type type="gboolean"/>
         <parameters>
           <parameter name="tokens" type="GPtrArray" array="true" null_term_array="true"/>
@@ -3902,6 +4038,7 @@
       </method>
       <method name="ToString" cname="g_icon_to_string">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
     </interface>
     <interface name="Initable" cname="GInitable" abstract="false" opaque="false" hidden="false">
@@ -3915,7 +4052,7 @@
         <return-type type="GType"/>
       </method>
       <method name="Newv" cname="g_initable_newv" shared="true">
-        <return-type type="gpointer*" owned="true"/>
+        <return-type type="GObject*" owned="true"/>
         <parameters throws="1">
           <parameter name="object_type" type="GType"/>
           <parameter name="n_parameters" type="guint"/>
@@ -4042,9 +4179,11 @@
       </method>
       <virtual_method name="CanEject" cname="can_eject">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanUnmount" cname="can_unmount">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="Eject" cname="eject" deprecated="true">
         <return-type type="void"/>
@@ -4081,30 +4220,39 @@
       </virtual_method>
       <virtual_method name="GetDefaultLocation" cname="get_default_location">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetDrive" cname="get_drive">
         <return-type type="GDrive*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetIcon" cname="get_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetName" cname="get_name">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetRoot" cname="get_root">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetSortKey" cname="get_sort_key">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetSymbolicIcon" cname="get_symbolic_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetUuid" cname="get_uuid">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetVolume" cname="get_volume">
         <return-type type="GVolume*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GuessContentType" cname="guess_content_type">
         <return-type type="void"/>
@@ -4182,9 +4330,11 @@
       </virtual_method>
       <method name="CanEject" cname="g_mount_can_eject">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CanUnmount" cname="g_mount_can_unmount">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Eject" cname="g_mount_eject" deprecated="true">
         <return-type type="void"/>
@@ -4221,30 +4371,39 @@
       </method>
       <method name="GetDefaultLocation" cname="g_mount_get_default_location">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetDrive" cname="g_mount_get_drive">
         <return-type type="GDrive*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetIcon" cname="g_mount_get_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetName" cname="g_mount_get_name">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetRoot" cname="g_mount_get_root">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetSortKey" cname="g_mount_get_sort_key">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetSymbolicIcon" cname="g_mount_get_symbolic_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetUuid" cname="g_mount_get_uuid">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetVolume" cname="g_mount_get_volume">
         <return-type type="GVolume*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GuessContentType" cname="g_mount_guess_content_type">
         <return-type type="void"/>
@@ -4272,6 +4431,7 @@
       </method>
       <method name="IsShadowed" cname="g_mount_is_shadowed">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Remount" cname="g_mount_remount">
         <return-type type="void"/>
@@ -4292,6 +4452,7 @@
       </method>
       <method name="Shadow" cname="g_mount_shadow">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Unmount" cname="g_mount_unmount" deprecated="true">
         <return-type type="void"/>
@@ -4328,6 +4489,7 @@
       </method>
       <method name="Unshadow" cname="g_mount_unshadow">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <signal name="Changed" cname="changed" when="last" field_name="changed">
         <return-type type="void"/>
@@ -4408,6 +4570,7 @@
       </method>
       <method name="GetNetworkAvailable" cname="g_network_monitor_get_network_available">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <property name="NetworkAvailable" cname="network-available" type="gboolean" readable="true" writeable="false" construct="false" construct-only="false"/>
       <signal name="NetworkChanged" cname="network-changed" when="last" field_name="network_changed">
@@ -4432,6 +4595,7 @@
       </method>
       <virtual_method name="CanPoll" cname="can_poll">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CreateSource" cname="create_source">
         <return-type type="GSource*" owned="true">
@@ -4443,6 +4607,7 @@
       </virtual_method>
       <virtual_method name="IsReadable" cname="is_readable">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="ReadNonblocking" cname="read_nonblocking">
         <return-type type="gssize"/>
@@ -4454,6 +4619,7 @@
       </virtual_method>
       <method name="CanPoll" cname="g_pollable_input_stream_can_poll">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CreateSource" cname="g_pollable_input_stream_create_source">
         <return-type type="GSource*" owned="true">
@@ -4465,6 +4631,7 @@
       </method>
       <method name="IsReadable" cname="g_pollable_input_stream_is_readable">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="ReadNonblocking" cname="g_pollable_input_stream_read_nonblocking">
         <return-type type="gssize"/>
@@ -4491,6 +4658,7 @@
       </method>
       <virtual_method name="CanPoll" cname="can_poll">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CreateSource" cname="create_source">
         <return-type type="GSource*" owned="true">
@@ -4502,6 +4670,7 @@
       </virtual_method>
       <virtual_method name="IsWritable" cname="is_writable">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="WriteNonblocking" cname="write_nonblocking">
         <return-type type="gssize"/>
@@ -4513,6 +4682,7 @@
       </virtual_method>
       <method name="CanPoll" cname="g_pollable_output_stream_can_poll">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CreateSource" cname="g_pollable_output_stream_create_source">
         <return-type type="GSource*" owned="true">
@@ -4524,6 +4694,7 @@
       </method>
       <method name="IsWritable" cname="g_pollable_output_stream_is_writable">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="WriteNonblocking" cname="g_pollable_output_stream_write_nonblocking">
         <return-type type="gssize"/>
@@ -4582,6 +4753,7 @@
       </virtual_method>
       <virtual_method name="SupportsHostname" cname="supports_hostname">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <method name="Connect" cname="g_proxy_connect">
         <return-type type="GIOStream*" owned="true"/>
@@ -4611,6 +4783,7 @@
       </method>
       <method name="SupportsHostname" cname="g_proxy_supports_hostname">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
     </interface>
     <interface name="ProxyResolver" cname="GProxyResolver" abstract="false" opaque="false" hidden="false">
@@ -4631,6 +4804,7 @@
       </method>
       <virtual_method name="IsSupported" cname="is_supported">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="Lookup" cname="lookup">
         <return-type type="gchar***" owned="true" array="true" null_term_array="true"/>
@@ -4658,6 +4832,7 @@
       </virtual_method>
       <method name="IsSupported" cname="g_proxy_resolver_is_supported">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Lookup" cname="g_proxy_resolver_lookup">
         <return-type type="gchar***" owned="true" array="true" null_term_array="true"/>
@@ -4760,9 +4935,11 @@
       </method>
       <virtual_method name="CanSeek" cname="can_seek">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanTruncate" cname="can_truncate">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="Seek" cname="seek">
         <return-type type="gboolean"/>
@@ -4775,6 +4952,7 @@
       </virtual_method>
       <virtual_method name="Tell" cname="tell">
         <return-type type="gint64"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="TruncateFn" cname="truncate_fn">
         <return-type type="gboolean"/>
@@ -4786,9 +4964,11 @@
       </virtual_method>
       <method name="CanSeek" cname="g_seekable_can_seek">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CanTruncate" cname="g_seekable_can_truncate">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Seek" cname="g_seekable_seek">
         <return-type type="gboolean"/>
@@ -4801,6 +4981,7 @@
       </method>
       <method name="Tell" cname="g_seekable_tell">
         <return-type type="gint64"/>
+        <parameters/>
       </method>
       <method name="Truncate" cname="g_seekable_truncate">
         <return-type type="gboolean"/>
@@ -4824,15 +5005,19 @@
       </method>
       <virtual_method name="Enumerate" cname="enumerate">
         <return-type type="GSocketAddressEnumerator*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="ProxyEnumerate" cname="proxy_enumerate">
         <return-type type="GSocketAddressEnumerator*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <method name="Enumerate" cname="g_socket_connectable_enumerate">
         <return-type type="GSocketAddressEnumerator*" owned="true"/>
+        <parameters/>
       </method>
       <method name="ProxyEnumerate" cname="g_socket_connectable_proxy_enumerate">
         <return-type type="GSocketAddressEnumerator*" owned="true"/>
+        <parameters/>
       </method>
     </interface>
     <interface name="TlsBackend" cname="GTlsBackend" abstract="false" opaque="false" hidden="false">
@@ -4867,27 +5052,35 @@
       </method>
       <virtual_method name="GetDefaultDatabase" cname="get_default_database">
         <return-type type="GTlsDatabase*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="SupportsTls" cname="supports_tls">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <method name="GetCertificateType" cname="g_tls_backend_get_certificate_type">
         <return-type type="GType"/>
+        <parameters/>
       </method>
       <method name="GetClientConnectionType" cname="g_tls_backend_get_client_connection_type">
         <return-type type="GType"/>
+        <parameters/>
       </method>
       <method name="GetDefaultDatabase" cname="g_tls_backend_get_default_database">
         <return-type type="GTlsDatabase*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetFileDatabaseType" cname="g_tls_backend_get_file_database_type">
         <return-type type="GType"/>
+        <parameters/>
       </method>
       <method name="GetServerConnectionType" cname="g_tls_backend_get_server_connection_type">
         <return-type type="GType"/>
+        <parameters/>
       </method>
       <method name="SupportsTls" cname="g_tls_backend_supports_tls">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
     </interface>
     <interface name="TlsClientConnection" cname="GTlsClientConnection" abstract="false" opaque="false" hidden="false">
@@ -4911,15 +5104,19 @@
         <return-type type="GList*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetServerIdentity" cname="g_tls_client_connection_get_server_identity">
         <return-type type="GSocketConnectable*"/>
+        <parameters/>
       </method>
       <method name="GetUseSsl3" cname="g_tls_client_connection_get_use_ssl3">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetValidationFlags" cname="g_tls_client_connection_get_validation_flags">
         <return-type type="GTlsCertificateFlags"/>
+        <parameters/>
       </method>
       <method name="SetServerIdentity" cname="g_tls_client_connection_set_server_identity">
         <return-type type="void"/>
@@ -5014,9 +5211,11 @@
       </method>
       <virtual_method name="CanEject" cname="can_eject">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanMount" cname="can_mount">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="Eject" cname="eject" deprecated="true">
         <return-type type="void"/>
@@ -5053,15 +5252,19 @@
       </virtual_method>
       <virtual_method name="EnumerateIdentifiers" cname="enumerate_identifiers">
         <return-type type="char***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetActivationRoot" cname="get_activation_root">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetDrive" cname="get_drive">
         <return-type type="GDrive*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetIcon" cname="get_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetIdentifier" cname="get_identifier">
         <return-type type="gchar*" owned="true"/>
@@ -5071,18 +5274,23 @@
       </virtual_method>
       <virtual_method name="GetMount" cname="get_mount">
         <return-type type="GMount*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetName" cname="get_name">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetSortKey" cname="get_sort_key">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetSymbolicIcon" cname="get_symbolic_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetUuid" cname="get_uuid">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="MountFinish" cname="mount_finish">
         <return-type type="gboolean"/>
@@ -5103,12 +5311,15 @@
       </virtual_method>
       <virtual_method name="ShouldAutomount" cname="should_automount">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <method name="CanEject" cname="g_volume_can_eject">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="CanMount" cname="g_volume_can_mount">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Eject" cname="g_volume_eject" deprecated="true">
         <return-type type="void"/>
@@ -5145,15 +5356,19 @@
       </method>
       <method name="EnumerateIdentifiers" cname="g_volume_enumerate_identifiers">
         <return-type type="char***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="GetActivationRoot" cname="g_volume_get_activation_root">
         <return-type type="GFile*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetDrive" cname="g_volume_get_drive">
         <return-type type="GDrive*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetIcon" cname="g_volume_get_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetIdentifier" cname="g_volume_get_identifier">
         <return-type type="gchar*" owned="true"/>
@@ -5163,18 +5378,23 @@
       </method>
       <method name="GetMount" cname="g_volume_get_mount">
         <return-type type="GMount*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetName" cname="g_volume_get_name">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetSortKey" cname="g_volume_get_sort_key">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetSymbolicIcon" cname="g_volume_get_symbolic_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetUuid" cname="g_volume_get_uuid">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="Mount" cname="g_volume_mount">
         <return-type type="void"/>
@@ -5195,6 +5415,7 @@
       </method>
       <method name="ShouldAutomount" cname="g_volume_should_automount">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <signal name="Changed" cname="changed" when="last" field_name="changed">
         <return-type type="void"/>
@@ -5212,12 +5433,12 @@
         </field>
         <method vm="get_display"/>
         <method vm="get_startup_notify_id"/>
-        <method vm="launch_failed"/>
+        <method signal_vm="launch_failed"/>
+        <method signal_vm="launched"/>
         <method vm="_g_reserved1"/>
         <method vm="_g_reserved2"/>
         <method vm="_g_reserved3"/>
         <method vm="_g_reserved4"/>
-        <method vm="_g_reserved5"/>
       </class_struct>
       <virtual_method name="_gGReserved1" cname="_g_reserved1" shared="true" hidden="true">
         <return-type type="void"/>
@@ -5229,9 +5450,6 @@
         <return-type type="void"/>
       </virtual_method>
       <virtual_method name="_gGReserved4" cname="_g_reserved4" shared="true" hidden="true">
-        <return-type type="void"/>
-      </virtual_method>
-      <virtual_method name="_gGReserved5" cname="_g_reserved5" shared="true" hidden="true">
         <return-type type="void"/>
       </virtual_method>
       <method name="GetType" cname="g_app_launch_context_get_type" shared="true">
@@ -5252,12 +5470,6 @@
           <parameter name="files" type="GList*" element_type="GFile*"/>
         </parameters>
       </virtual_method>
-      <virtual_method name="LaunchFailed" cname="launch_failed">
-        <return-type type="void"/>
-        <parameters>
-          <parameter name="startup_notify_id" type="const-gchar*"/>
-        </parameters>
-      </virtual_method>
       <method name="GetDisplay" cname="g_app_launch_context_get_display">
         <return-type type="gchar*" owned="true"/>
         <parameters>
@@ -5267,18 +5479,13 @@
       </method>
       <method name="GetEnvironment" cname="g_app_launch_context_get_environment">
         <return-type type="char***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="GetStartupNotifyId" cname="g_app_launch_context_get_startup_notify_id">
         <return-type type="gchar*" owned="true"/>
         <parameters>
           <parameter name="info" type="GAppInfo*"/>
           <parameter name="files" type="GList*" element_type="GFile*"/>
-        </parameters>
-      </method>
-      <method name="LaunchFailed" cname="g_app_launch_context_launch_failed">
-        <return-type type="void"/>
-        <parameters>
-          <parameter name="startup_notify_id" type="const-gchar*"/>
         </parameters>
       </method>
       <method name="Setenv" cname="g_app_launch_context_setenv">
@@ -5298,6 +5505,21 @@
       <field cname="priv" access="private" writeable="false" readable="false" name="Priv" type="GAppLaunchContextPrivate*">
         <warning>missing glib:type-name</warning>
       </field>
+      <signal name="LaunchFailed" cname="launch-failed" when="last" field_name="launch_failed">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="_object" type="const-gchar*"/>
+        </parameters>
+      </signal>
+      <signal name="Launched" cname="launched" when="last" field_name="launched">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="_object" type="GAppInfo*"/>
+          <parameter name="p0" type="GVariant*">
+            <warning>missing glib:type-name</warning>
+          </parameter>
+        </parameters>
+      </signal>
     </object>
     <object name="Application" cname="GApplication" abstract="false" opaque="false" hidden="false" parent="GObject">
       <implements>
@@ -5383,42 +5605,53 @@
       <virtual_method name="LocalCommandLine" cname="local_command_line">
         <return-type type="gboolean"/>
         <parameters>
-          <parameter name="arguments" type="const-gchar*"/>
-          <parameter name="exit_status" type="gint"/>
+          <parameter name="arguments" type="gchar****" owned="true" pass_as="ref" array="true" null_term_array="true"/>
+          <parameter name="exit_status" type="gint*" owned="true" pass_as="out"/>
         </parameters>
       </virtual_method>
       <virtual_method name="QuitMainloop" cname="quit_mainloop">
         <return-type type="void"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="RunMainloop" cname="run_mainloop">
         <return-type type="void"/>
+        <parameters/>
       </virtual_method>
       <method name="GetApplicationId" cname="g_application_get_application_id">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetDbusConnection" cname="g_application_get_dbus_connection">
         <return-type type="GDBusConnection*"/>
+        <parameters/>
       </method>
       <method name="GetDbusObjectPath" cname="g_application_get_dbus_object_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetFlags" cname="g_application_get_flags">
         <return-type type="GApplicationFlags"/>
+        <parameters/>
       </method>
       <method name="GetInactivityTimeout" cname="g_application_get_inactivity_timeout">
         <return-type type="guint"/>
+        <parameters/>
       </method>
       <method name="GetIsRegistered" cname="g_application_get_is_registered">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsRemote" cname="g_application_get_is_remote">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Hold" cname="g_application_hold">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Quit" cname="g_application_quit">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Register" cname="g_application_register">
         <return-type type="gboolean"/>
@@ -5429,6 +5662,7 @@
       </method>
       <method name="Release" cname="g_application_release">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Run" cname="g_application_run">
         <return-type type="gint"/>
@@ -5451,6 +5685,7 @@
       </method>
       <method name="SetDefault" cname="g_application_set_default">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="SetFlags" cname="g_application_set_flags">
         <return-type type="void"/>
@@ -5487,7 +5722,7 @@
       <signal name="Open" cname="open" when="last" field_name="open">
         <return-type type="void"/>
         <parameters>
-          <parameter name="files" type="" array="true" array_length_param_index="1"/>
+          <parameter name="files" type="gpointer" array="true" array_length_param_index="1"/>
           <parameter name="n_files" type="gint"/>
           <parameter name="hint" type="const-gchar*"/>
         </parameters>
@@ -5508,11 +5743,16 @@
         </field>
         <method vm="print_literal"/>
         <method vm="printerr_literal"/>
-        <field cname="padding" access="private" writeable="false" readable="false" name="Padding" type="gpointer" array="true" array_len="12"/>
+        <method vm="get_stdin"/>
+        <field cname="padding" access="private" writeable="false" readable="false" name="Padding" type="gpointer" array="true" array_len="11"/>
       </class_struct>
       <method name="GetType" cname="g_application_command_line_get_type" shared="true">
         <return-type type="GType"/>
       </method>
+      <virtual_method name="GetStdin" cname="get_stdin">
+        <return-type type="GInputStream*" owned="true"/>
+        <parameters/>
+      </virtual_method>
       <virtual_method name="PrintLiteral" cname="print_literal">
         <return-type type="void"/>
         <parameters>
@@ -5525,6 +5765,12 @@
           <parameter name="message" type="const-gchar*"/>
         </parameters>
       </virtual_method>
+      <method name="CreateFileForArg" cname="g_application_command_line_create_file_for_arg">
+        <return-type type="GFile*" owned="true"/>
+        <parameters>
+          <parameter name="arg" type="const-gchar*"/>
+        </parameters>
+      </method>
       <method name="GetArguments" cname="g_application_command_line_get_arguments">
         <return-type type="gchar***" owned="true" array="true" array_length_param_index="0"/>
         <parameters>
@@ -5533,20 +5779,29 @@
       </method>
       <method name="GetCwd" cname="g_application_command_line_get_cwd">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetEnviron" cname="g_application_command_line_get_environ">
         <return-type type="const-gchar**" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="GetExitStatus" cname="g_application_command_line_get_exit_status">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="GetIsRemote" cname="g_application_command_line_get_is_remote">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetPlatformData" cname="g_application_command_line_get_platform_data">
         <return-type type="GVariant*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
+      </method>
+      <method name="GetStdin" cname="g_application_command_line_get_stdin">
+        <return-type type="GInputStream*" owned="true"/>
+        <parameters/>
       </method>
       <method name="Getenv" cname="g_application_command_line_getenv">
         <return-type type="const-gchar*"/>
@@ -5666,9 +5921,11 @@
       </method>
       <method name="GetAvailable" cname="g_buffered_input_stream_get_available">
         <return-type type="gsize"/>
+        <parameters/>
       </method>
       <method name="GetBufferSize" cname="g_buffered_input_stream_get_buffer_size">
         <return-type type="gsize"/>
+        <parameters/>
       </method>
       <method name="Peek" cname="g_buffered_input_stream_peek">
         <return-type type="gsize"/>
@@ -5736,9 +5993,11 @@
       </constructor>
       <method name="GetAutoGrow" cname="g_buffered_output_stream_get_auto_grow">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetBufferSize" cname="g_buffered_output_stream_get_buffer_size">
         <return-type type="gsize"/>
+        <parameters/>
       </method>
       <method name="SetAutoGrow" cname="g_buffered_output_stream_set_auto_grow">
         <return-type type="void"/>
@@ -5795,6 +6054,7 @@
       </method>
       <method name="Cancel" cname="g_cancellable_cancel">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Connect" cname="g_cancellable_connect">
         <return-type type="gulong"/>
@@ -5812,9 +6072,11 @@
       </method>
       <method name="GetFd" cname="g_cancellable_get_fd">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="IsCancelled" cname="g_cancellable_is_cancelled">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="MakePollfd" cname="g_cancellable_make_pollfd">
         <return-type type="gboolean"/>
@@ -5826,18 +6088,25 @@
       </method>
       <method name="PopCurrent" cname="g_cancellable_pop_current">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="PushCurrent" cname="g_cancellable_push_current">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="ReleaseFd" cname="g_cancellable_release_fd">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Reset" cname="g_cancellable_reset">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="SetErrorIfCancelled" cname="g_cancellable_set_error_if_cancelled">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GObject*"/>
       <field cname="priv" access="private" writeable="false" readable="false" name="Priv" type="GCancellablePrivate*">
@@ -5869,9 +6138,11 @@
       </constructor>
       <method name="GetNumFallbacks" cname="g_charset_converter_get_num_fallbacks">
         <return-type type="guint"/>
+        <parameters/>
       </method>
       <method name="GetUseFallback" cname="g_charset_converter_get_use_fallback">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="SetUseFallback" cname="g_charset_converter_set_use_fallback">
         <return-type type="void"/>
@@ -5923,6 +6194,7 @@
       </constructor>
       <method name="GetConverter" cname="g_converter_input_stream_get_converter">
         <return-type type="GConverter*"/>
+        <parameters/>
       </method>
       <property name="Converter" cname="converter" type="GConverter*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GFilterInputStream*"/>
@@ -5970,6 +6242,7 @@
       </constructor>
       <method name="GetConverter" cname="g_converter_output_stream_get_converter">
         <return-type type="GConverter*"/>
+        <parameters/>
       </method>
       <property name="Converter" cname="converter" type="GConverter*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GFilterOutputStream*"/>
@@ -5983,8 +6256,17 @@
         <return-type type="GType"/>
       </method>
       <constructor cname="g_credentials_new" disable_void_ctor=""/>
+      <method name="GetUnixPid" cname="g_credentials_get_unix_pid">
+        <return-type type="gint"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
+      </method>
       <method name="GetUnixUser" cname="g_credentials_get_unix_user">
         <return-type type="guint"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="IsSameUser" cname="g_credentials_is_same_user">
         <return-type type="gboolean"/>
@@ -6009,6 +6291,7 @@
       </method>
       <method name="ToString" cname="g_credentials_to_string">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
     </object>
     <object name="DBusActionGroup" cname="GDBusActionGroup" abstract="false" opaque="false" hidden="false" parent="GObject">
@@ -6292,27 +6575,35 @@
       </method>
       <method name="GetCapabilities" cname="g_dbus_connection_get_capabilities">
         <return-type type="GDBusCapabilityFlags"/>
+        <parameters/>
       </method>
       <method name="GetExitOnClose" cname="g_dbus_connection_get_exit_on_close">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetGuid" cname="g_dbus_connection_get_guid">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetLastSerial" cname="g_dbus_connection_get_last_serial">
         <return-type type="guint32"/>
+        <parameters/>
       </method>
       <method name="GetPeerCredentials" cname="g_dbus_connection_get_peer_credentials">
         <return-type type="GCredentials*"/>
+        <parameters/>
       </method>
       <method name="GetStream" cname="g_dbus_connection_get_stream">
         <return-type type="GIOStream*"/>
+        <parameters/>
       </method>
       <method name="GetUniqueName" cname="g_dbus_connection_get_unique_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="IsClosed" cname="g_dbus_connection_is_closed">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="RegisterObject" cname="g_dbus_connection_register_object">
         <return-type type="guint"/>
@@ -6415,6 +6706,7 @@
       </method>
       <method name="StartMessageProcessing" cname="g_dbus_connection_start_message_processing">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="UnexportActionGroup" cname="g_dbus_connection_unexport_action_group">
         <return-type type="void"/>
@@ -6480,21 +6772,25 @@
       </method>
       <virtual_method name="Flush" cname="flush">
         <return-type type="void"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetInfo" cname="get_info">
         <return-type type="GDBusInterfaceInfo*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetProperties" cname="get_properties">
         <return-type type="GVariant*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetVtable" cname="get_vtable" hidden="true">
         <return-type type="GDBusInterfaceVTable*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </virtual_method>
       <method name="Export" cname="g_dbus_interface_skeleton_export">
         <return-type type="gboolean"/>
@@ -6506,28 +6802,35 @@
       </method>
       <method name="Flush" cname="g_dbus_interface_skeleton_flush">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GetConnection" cname="g_dbus_interface_skeleton_get_connection">
         <return-type type="GDBusConnection*"/>
+        <parameters/>
       </method>
       <method name="GetConnections" cname="g_dbus_interface_skeleton_get_connections">
         <return-type type="GList*" element_type="GDBusConnection*" elements_owned="true" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetFlags" cname="g_dbus_interface_skeleton_get_flags">
         <return-type type="GDBusInterfaceSkeletonFlags"/>
+        <parameters/>
       </method>
       <method name="GetInfo" cname="g_dbus_interface_skeleton_get_info">
         <return-type type="GDBusInterfaceInfo*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetObjectPath" cname="g_dbus_interface_skeleton_get_object_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetProperties" cname="g_dbus_interface_skeleton_get_properties">
         <return-type type="GVariant*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="HasConnection" cname="g_dbus_interface_skeleton_has_connection">
         <return-type type="gboolean"/>
@@ -6543,6 +6846,7 @@
       </method>
       <method name="Unexport" cname="g_dbus_interface_skeleton_unexport">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="UnexportFromConnection" cname="g_dbus_interface_skeleton_unexport_from_connection">
         <return-type type="void"/>
@@ -6612,26 +6916,35 @@
       </method>
       <method name="Copy" cname="g_dbus_message_copy">
         <return-type type="GDBusMessage*" owned="true"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="GetArg0" cname="g_dbus_message_get_arg0">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetBody" cname="g_dbus_message_get_body">
         <return-type type="GVariant*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetByteOrder" cname="g_dbus_message_get_byte_order">
         <return-type type="GDBusMessageByteOrder"/>
+        <parameters/>
       </method>
       <method name="GetDestination" cname="g_dbus_message_get_destination">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetErrorName" cname="g_dbus_message_get_error_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetFlags" cname="g_dbus_message_get_flags">
         <return-type type="GDBusMessageFlags"/>
+        <parameters/>
       </method>
       <method name="GetHeader" cname="g_dbus_message_get_header">
         <return-type type="GVariant*" owned="true">
@@ -6643,42 +6956,55 @@
       </method>
       <method name="GetHeaderFields" cname="g_dbus_message_get_header_fields">
         <return-type type="guchar*" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="GetInterface" cname="g_dbus_message_get_interface">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetLocked" cname="g_dbus_message_get_locked">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetMember" cname="g_dbus_message_get_member">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetMessageType" cname="g_dbus_message_get_message_type">
         <return-type type="GDBusMessageType"/>
+        <parameters/>
       </method>
       <method name="GetNumUnixFds" cname="g_dbus_message_get_num_unix_fds">
         <return-type type="guint32"/>
+        <parameters/>
       </method>
       <method name="GetPath" cname="g_dbus_message_get_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetReplySerial" cname="g_dbus_message_get_reply_serial">
         <return-type type="guint32"/>
+        <parameters/>
       </method>
       <method name="GetSender" cname="g_dbus_message_get_sender">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetSerial" cname="g_dbus_message_get_serial">
         <return-type type="guint32"/>
+        <parameters/>
       </method>
       <method name="GetSignature" cname="g_dbus_message_get_signature">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetUnixFdList" cname="g_dbus_message_get_unix_fd_list">
         <return-type type="GUnixFDList*"/>
+        <parameters/>
       </method>
       <method name="Lock" cname="g_dbus_message_lock">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="NewMethodErrorLiteral" cname="g_dbus_message_new_method_error_literal">
         <return-type type="GDBusMessage*" owned="true"/>
@@ -6689,6 +7015,7 @@
       </method>
       <method name="NewMethodReply" cname="g_dbus_message_new_method_reply">
         <return-type type="GDBusMessage*" owned="true"/>
+        <parameters/>
       </method>
       <method name="Print" cname="g_dbus_message_print">
         <return-type type="gchar*" owned="true"/>
@@ -6807,6 +7134,9 @@
       </method>
       <method name="ToGerror" cname="g_dbus_message_to_gerror">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <property name="Locked" cname="locked" type="gboolean" readable="true" writeable="false" construct="false" construct-only="false"/>
     </object>
@@ -6816,31 +7146,39 @@
       </method>
       <method name="GetConnection" cname="g_dbus_method_invocation_get_connection">
         <return-type type="GDBusConnection*"/>
+        <parameters/>
       </method>
       <method name="GetInterfaceName" cname="g_dbus_method_invocation_get_interface_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetMessage" cname="g_dbus_method_invocation_get_message">
         <return-type type="GDBusMessage*"/>
+        <parameters/>
       </method>
       <method name="GetMethodInfo" cname="g_dbus_method_invocation_get_method_info">
         <return-type type="GDBusMethodInfo*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetMethodName" cname="g_dbus_method_invocation_get_method_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetObjectPath" cname="g_dbus_method_invocation_get_object_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetParameters" cname="g_dbus_method_invocation_get_parameters">
         <return-type type="GVariant*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetSender" cname="g_dbus_method_invocation_get_sender">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="ReturnDbusError" cname="g_dbus_method_invocation_return_dbus_error">
         <return-type type="void"/>
@@ -6966,15 +7304,19 @@
       </method>
       <method name="GetConnection" cname="g_dbus_object_manager_client_get_connection">
         <return-type type="GDBusConnection*"/>
+        <parameters/>
       </method>
       <method name="GetFlags" cname="g_dbus_object_manager_client_get_flags">
         <return-type type="GDBusObjectManagerClientFlags"/>
+        <parameters/>
       </method>
       <method name="GetName" cname="g_dbus_object_manager_client_get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetNameOwner" cname="g_dbus_object_manager_client_get_name_owner">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <property name="BusType" cname="bus-type" type="GBusType" readable="false" writeable="true" construct="false" construct-only="true"/>
       <property name="Connection" cname="connection" type="GDBusConnection*" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -7045,6 +7387,7 @@
       </method>
       <method name="GetConnection" cname="g_dbus_object_manager_server_get_connection">
         <return-type type="GDBusConnection*" owned="true"/>
+        <parameters/>
       </method>
       <method name="IsExported" cname="g_dbus_object_manager_server_is_exported">
         <return-type type="gboolean"/>
@@ -7092,6 +7435,7 @@
       </constructor>
       <method name="GetConnection" cname="g_dbus_object_proxy_get_connection">
         <return-type type="GDBusConnection*"/>
+        <parameters/>
       </method>
       <property name="GConnection" cname="g-connection" type="GDBusConnection*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <property name="GObjectPath" cname="g-object-path" type="gchar*" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -7127,6 +7471,7 @@
       </method>
       <method name="Flush" cname="g_dbus_object_skeleton_flush">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="RemoveInterface" cname="g_dbus_object_skeleton_remove_interface">
         <return-type type="void"/>
@@ -7334,32 +7679,41 @@
       </method>
       <method name="GetCachedPropertyNames" cname="g_dbus_proxy_get_cached_property_names">
         <return-type type="gchar***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="GetConnection" cname="g_dbus_proxy_get_connection">
         <return-type type="GDBusConnection*"/>
+        <parameters/>
       </method>
       <method name="GetDefaultTimeout" cname="g_dbus_proxy_get_default_timeout">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="GetFlags" cname="g_dbus_proxy_get_flags">
         <return-type type="GDBusProxyFlags"/>
+        <parameters/>
       </method>
       <method name="GetInterfaceInfo" cname="g_dbus_proxy_get_interface_info">
         <return-type type="GDBusInterfaceInfo*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetInterfaceName" cname="g_dbus_proxy_get_interface_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetName" cname="g_dbus_proxy_get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetNameOwner" cname="g_dbus_proxy_get_name_owner">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetObjectPath" cname="g_dbus_proxy_get_object_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="SetCachedProperty" cname="g_dbus_proxy_set_cached_property">
         <return-type type="void"/>
@@ -7435,21 +7789,27 @@
       </constructor>
       <method name="GetClientAddress" cname="g_dbus_server_get_client_address">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetFlags" cname="g_dbus_server_get_flags">
         <return-type type="GDBusServerFlags"/>
+        <parameters/>
       </method>
       <method name="GetGuid" cname="g_dbus_server_get_guid">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="IsActive" cname="g_dbus_server_is_active">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Start" cname="g_dbus_server_start">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Stop" cname="g_dbus_server_stop">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <property name="Active" cname="active" type="gboolean" readable="true" writeable="false" construct="false" construct-only="false"/>
       <property name="Address" cname="address" type="gchar*" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -7503,9 +7863,11 @@
       </constructor>
       <method name="GetByteOrder" cname="g_data_input_stream_get_byte_order">
         <return-type type="GDataStreamByteOrder"/>
+        <parameters/>
       </method>
       <method name="GetNewlineType" cname="g_data_input_stream_get_newline_type">
         <return-type type="GDataStreamNewlineType"/>
+        <parameters/>
       </method>
       <method name="ReadByte" cname="g_data_input_stream_read_byte">
         <return-type type="guint8"/>
@@ -7711,6 +8073,7 @@
       </constructor>
       <method name="GetByteOrder" cname="g_data_output_stream_get_byte_order">
         <return-type type="GDataStreamByteOrder"/>
+        <parameters/>
       </method>
       <method name="PutByte" cname="g_data_output_stream_put_byte">
         <return-type type="gboolean"/>
@@ -7823,23 +8186,35 @@
           <parameter name="desktop_env" type="const-gchar*"/>
         </parameters>
       </method>
+      <method name="GetBoolean" cname="g_desktop_app_info_get_boolean">
+        <return-type type="gboolean"/>
+        <parameters>
+          <parameter name="key" type="const-gchar*"/>
+        </parameters>
+      </method>
       <method name="GetCategories" cname="g_desktop_app_info_get_categories">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetFilename" cname="g_desktop_app_info_get_filename">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetGenericName" cname="g_desktop_app_info_get_generic_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetIsHidden" cname="g_desktop_app_info_get_is_hidden">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetKeywords" cname="g_desktop_app_info_get_keywords">
         <return-type type="const char* const*" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="GetNodisplay" cname="g_desktop_app_info_get_nodisplay">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetShowIn" cname="g_desktop_app_info_get_show_in">
         <return-type type="gboolean"/>
@@ -7849,6 +8224,19 @@
       </method>
       <method name="GetStartupWmClass" cname="g_desktop_app_info_get_startup_wm_class">
         <return-type type="const-gchar*"/>
+        <parameters/>
+      </method>
+      <method name="GetString" cname="g_desktop_app_info_get_string">
+        <return-type type="gchar*" owned="true"/>
+        <parameters>
+          <parameter name="key" type="const-gchar*"/>
+        </parameters>
+      </method>
+      <method name="HasKey" cname="g_desktop_app_info_has_key">
+        <return-type type="gboolean"/>
+        <parameters>
+          <parameter name="key" type="const-gchar*"/>
+        </parameters>
       </method>
       <method name="LaunchUrisAsManager" cname="g_desktop_app_info_launch_uris_as_manager">
         <return-type type="gboolean"/>
@@ -7886,9 +8274,11 @@
       </constructor>
       <method name="GetIcon" cname="g_emblem_get_icon">
         <return-type type="GIcon*"/>
+        <parameters/>
       </method>
       <method name="GetOrigin" cname="g_emblem_get_origin">
         <return-type type="GEmblemOrigin"/>
+        <parameters/>
       </method>
       <property name="Icon" cname="icon" type="GObject*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <property name="Origin" cname="origin" type="GEmblemOrigin" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -7919,12 +8309,15 @@
       </method>
       <method name="ClearEmblems" cname="g_emblemed_icon_clear_emblems">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GetEmblems" cname="g_emblemed_icon_get_emblems">
         <return-type type="GList*" element_type="GEmblem*"/>
+        <parameters/>
       </method>
       <method name="GetIcon" cname="g_emblemed_icon_get_icon">
         <return-type type="GIcon*"/>
+        <parameters/>
       </method>
       <property name="Gicon" cname="gicon" type="GIcon*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GObject*"/>
@@ -8045,14 +8438,23 @@
           <parameter name="error" type="GError**"/>
         </parameters>
       </method>
+      <method name="GetChild" cname="g_file_enumerator_get_child">
+        <return-type type="GFile*" owned="true"/>
+        <parameters>
+          <parameter name="info" type="GFileInfo*"/>
+        </parameters>
+      </method>
       <method name="GetContainer" cname="g_file_enumerator_get_container">
         <return-type type="GFile*"/>
+        <parameters/>
       </method>
       <method name="HasPending" cname="g_file_enumerator_has_pending">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsClosed" cname="g_file_enumerator_is_closed">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="NextFile" cname="g_file_enumerator_next_file">
         <return-type type="GFileInfo*" owned="true"/>
@@ -8133,12 +8535,15 @@
       </method>
       <virtual_method name="CanSeek" cname="can_seek">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanTruncate" cname="can_truncate">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetEtag" cname="get_etag">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="QueryInfo" cname="query_info">
         <return-type type="GFileInfo*" owned="true"/>
@@ -8176,6 +8581,7 @@
       </virtual_method>
       <virtual_method name="Tell" cname="tell">
         <return-type type="gint64"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="TruncateFn" cname="truncate_fn">
         <return-type type="gboolean"/>
@@ -8187,6 +8593,7 @@
       </virtual_method>
       <method name="GetEtag" cname="g_file_io_stream_get_etag">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="QueryInfo" cname="g_file_io_stream_query_info">
         <return-type type="GFileInfo*" owned="true"/>
@@ -8234,6 +8641,7 @@
       </constructor>
       <method name="GetFile" cname="g_file_icon_get_file">
         <return-type type="GFile*"/>
+        <parameters/>
       </method>
       <property name="File" cname="file" type="GFile*" readable="true" writeable="true" construct="false" construct-only="true"/>
     </object>
@@ -8245,6 +8653,7 @@
       <constructor cname="g_file_info_new" disable_void_ctor=""/>
       <method name="ClearStatus" cname="g_file_info_clear_status">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="CopyInto" cname="g_file_info_copy_into">
         <return-type type="void"/>
@@ -8254,6 +8663,7 @@
       </method>
       <method name="Dup" cname="g_file_info_dup">
         <return-type type="GFileInfo*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetAttributeAsString" cname="g_file_info_get_attribute_as_string">
         <return-type type="gchar*" owned="true"/>
@@ -8338,30 +8748,45 @@
       </method>
       <method name="GetContentType" cname="g_file_info_get_content_type">
         <return-type type="const-gchar*"/>
+        <parameters/>
+      </method>
+      <method name="GetDeletionDate" cname="g_file_info_get_deletion_date">
+        <return-type type="GDateTime*" owned="true">
+          <warning>missing glib:type-name</warning>
+        </return-type>
+        <parameters/>
       </method>
       <method name="GetDisplayName" cname="g_file_info_get_display_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetEditName" cname="g_file_info_get_edit_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetEtag" cname="g_file_info_get_etag">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetFileType" cname="g_file_info_get_file_type">
         <return-type type="GFileType"/>
+        <parameters/>
       </method>
       <method name="GetIcon" cname="g_file_info_get_icon">
         <return-type type="GIcon*"/>
+        <parameters/>
       </method>
       <method name="GetIsBackup" cname="g_file_info_get_is_backup">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsHidden" cname="g_file_info_get_is_hidden">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsSymlink" cname="g_file_info_get_is_symlink">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetModificationTime" cname="g_file_info_get_modification_time">
         <return-type type="void"/>
@@ -8373,18 +8798,23 @@
       </method>
       <method name="GetName" cname="g_file_info_get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetSize" cname="g_file_info_get_size">
         <return-type type="gint64"/>
+        <parameters/>
       </method>
       <method name="GetSortOrder" cname="g_file_info_get_sort_order">
         <return-type type="gint32"/>
+        <parameters/>
       </method>
       <method name="GetSymbolicIcon" cname="g_file_info_get_symbolic_icon">
         <return-type type="GIcon*"/>
+        <parameters/>
       </method>
       <method name="GetSymlinkTarget" cname="g_file_info_get_symlink_target">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="HasAttribute" cname="g_file_info_has_attribute">
         <return-type type="gboolean"/>
@@ -8578,6 +9008,7 @@
       </method>
       <method name="UnsetAttributeMask" cname="g_file_info_unset_attribute_mask">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </object>
     <object name="FileInputStream" cname="GFileInputStream" abstract="false" opaque="false" hidden="false" parent="GInputStream">
@@ -8620,6 +9051,7 @@
       </method>
       <virtual_method name="CanSeek" cname="can_seek">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="QueryInfo" cname="query_info">
         <return-type type="GFileInfo*" owned="true"/>
@@ -8657,6 +9089,7 @@
       </virtual_method>
       <virtual_method name="Tell" cname="tell">
         <return-type type="gint64"/>
+        <parameters/>
       </virtual_method>
       <method name="QueryInfo" cname="g_file_input_stream_query_info">
         <return-type type="GFileInfo*" owned="true"/>
@@ -8721,9 +9154,11 @@
       </method>
       <virtual_method name="Cancel" cname="cancel">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <method name="Cancel" cname="g_file_monitor_cancel">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="EmitEvent" cname="g_file_monitor_emit_event">
         <return-type type="void"/>
@@ -8735,6 +9170,7 @@
       </method>
       <method name="IsCancelled" cname="g_file_monitor_is_cancelled">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="SetRateLimit" cname="g_file_monitor_set_rate_limit">
         <return-type type="void"/>
@@ -8800,12 +9236,15 @@
       </method>
       <virtual_method name="CanSeek" cname="can_seek">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="CanTruncate" cname="can_truncate">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetEtag" cname="get_etag">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="QueryInfo" cname="query_info">
         <return-type type="GFileInfo*" owned="true"/>
@@ -8843,6 +9282,7 @@
       </virtual_method>
       <virtual_method name="Tell" cname="tell">
         <return-type type="gint64"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="TruncateFn" cname="truncate_fn">
         <return-type type="gboolean"/>
@@ -8854,6 +9294,7 @@
       </virtual_method>
       <method name="GetEtag" cname="g_file_output_stream_get_etag">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="QueryInfo" cname="g_file_output_stream_query_info">
         <return-type type="GFileInfo*" owned="true"/>
@@ -8954,9 +9395,11 @@
       </method>
       <method name="GetBaseStream" cname="g_filter_input_stream_get_base_stream">
         <return-type type="GInputStream*"/>
+        <parameters/>
       </method>
       <method name="GetCloseBaseStream" cname="g_filter_input_stream_get_close_base_stream">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="SetCloseBaseStream" cname="g_filter_input_stream_set_close_base_stream">
         <return-type type="void"/>
@@ -8992,9 +9435,11 @@
       </method>
       <method name="GetBaseStream" cname="g_filter_output_stream_get_base_stream">
         <return-type type="GOutputStream*"/>
+        <parameters/>
       </method>
       <method name="GetCloseBaseStream" cname="g_filter_output_stream_get_close_base_stream">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="SetCloseBaseStream" cname="g_filter_output_stream_set_close_base_stream">
         <return-type type="void"/>
@@ -9025,9 +9470,11 @@
       </method>
       <method name="Load" cname="g_io_module_load">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Unload" cname="g_io_module_unload">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </object>
     <object name="IOStream" cname="GIOStream" abstract="true" opaque="false" hidden="false" parent="GObject">
@@ -9116,12 +9563,15 @@
       </virtual_method>
       <virtual_method name="GetInputStream" cname="get_input_stream">
         <return-type type="GInputStream*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetOutputStream" cname="get_output_stream">
         <return-type type="GOutputStream*"/>
+        <parameters/>
       </virtual_method>
       <method name="ClearPending" cname="g_io_stream_clear_pending">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Close" cname="g_io_stream_close">
         <return-type type="gboolean"/>
@@ -9148,18 +9598,25 @@
       </method>
       <method name="GetInputStream" cname="g_io_stream_get_input_stream">
         <return-type type="GInputStream*"/>
+        <parameters/>
       </method>
       <method name="GetOutputStream" cname="g_io_stream_get_output_stream">
         <return-type type="GOutputStream*"/>
+        <parameters/>
       </method>
       <method name="HasPending" cname="g_io_stream_has_pending">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsClosed" cname="g_io_stream_is_closed">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="SetPending" cname="g_io_stream_set_pending">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="SpliceAsync" cname="g_io_stream_splice_async">
         <return-type type="void"/>
@@ -9214,9 +9671,11 @@
       </constructor>
       <virtual_method name="ToBytes" cname="to_bytes" hidden="true">
         <return-type type="guint8"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="ToString" cname="to_string">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </virtual_method>
       <method name="Equal" cname="g_inet_address_equal">
         <return-type type="gboolean"/>
@@ -9226,42 +9685,55 @@
       </method>
       <method name="GetFamily" cname="g_inet_address_get_family">
         <return-type type="GSocketFamily"/>
+        <parameters/>
       </method>
       <method name="GetIsAny" cname="g_inet_address_get_is_any">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsLinkLocal" cname="g_inet_address_get_is_link_local">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsLoopback" cname="g_inet_address_get_is_loopback">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsMcGlobal" cname="g_inet_address_get_is_mc_global">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsMcLinkLocal" cname="g_inet_address_get_is_mc_link_local">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsMcNodeLocal" cname="g_inet_address_get_is_mc_node_local">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsMcOrgLocal" cname="g_inet_address_get_is_mc_org_local">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsMcSiteLocal" cname="g_inet_address_get_is_mc_site_local">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsMulticast" cname="g_inet_address_get_is_multicast">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetIsSiteLocal" cname="g_inet_address_get_is_site_local">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetNativeSize" cname="g_inet_address_get_native_size">
         <return-type type="gsize"/>
+        <parameters/>
       </method>
       <method name="ToString" cname="g_inet_address_to_string">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <property name="Bytes" cname="bytes" type="gpointer" readable="true" writeable="true" construct="false" construct-only="true"/>
       <property name="Family" cname="family" type="GSocketFamily" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -9311,12 +9783,15 @@
       </method>
       <method name="GetAddress" cname="g_inet_address_mask_get_address">
         <return-type type="GInetAddress*"/>
+        <parameters/>
       </method>
       <method name="GetFamily" cname="g_inet_address_mask_get_family">
         <return-type type="GSocketFamily"/>
+        <parameters/>
       </method>
       <method name="GetLength" cname="g_inet_address_mask_get_length">
         <return-type type="guint"/>
+        <parameters/>
       </method>
       <method name="Matches" cname="g_inet_address_mask_matches">
         <return-type type="gboolean"/>
@@ -9326,6 +9801,7 @@
       </method>
       <method name="ToString" cname="g_inet_address_mask_to_string">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <property name="Address" cname="address" type="GInetAddress*" readable="true" writeable="true" construct="false" construct-only="false"/>
       <property name="Family" cname="family" type="GSocketFamily" readable="true" writeable="false" construct="false" construct-only="false"/>
@@ -9355,15 +9831,19 @@
       </constructor>
       <method name="GetAddress" cname="g_inet_socket_address_get_address">
         <return-type type="GInetAddress*"/>
+        <parameters/>
       </method>
       <method name="GetFlowinfo" cname="g_inet_socket_address_get_flowinfo">
         <return-type type="guint32"/>
+        <parameters/>
       </method>
       <method name="GetPort" cname="g_inet_socket_address_get_port">
         <return-type type="guint16"/>
+        <parameters/>
       </method>
       <method name="GetScopeId" cname="g_inet_socket_address_get_scope_id">
         <return-type type="guint32"/>
+        <parameters/>
       </method>
       <property name="Address" cname="address" type="GInetAddress*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <property name="Flowinfo" cname="flowinfo" type="guint" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -9438,7 +9918,7 @@
       <virtual_method name="ReadAsync" cname="read_async">
         <return-type type="void"/>
         <parameters>
-          <parameter name="buffer" type="gpointer"/>
+          <parameter name="buffer" type="void*" array="true" array_length_param_index="1"/>
           <parameter name="count" type="gsize"/>
           <parameter name="io_priority" type="gint"/>
           <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
@@ -9489,6 +9969,7 @@
       </virtual_method>
       <method name="ClearPending" cname="g_input_stream_clear_pending">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Close" cname="g_input_stream_close">
         <return-type type="gboolean"/>
@@ -9515,14 +9996,16 @@
       </method>
       <method name="HasPending" cname="g_input_stream_has_pending">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsClosed" cname="g_input_stream_is_closed">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Read" cname="g_input_stream_read">
         <return-type type="gssize"/>
         <parameters throws="1">
-          <parameter name="buffer" type="gpointer"/>
+          <parameter name="buffer" type="void*" array="true" array_length_param_index="1"/>
           <parameter name="count" type="gsize"/>
           <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
           <parameter name="error" type="GError**"/>
@@ -9531,7 +10014,7 @@
       <method name="ReadAll" cname="g_input_stream_read_all">
         <return-type type="gboolean"/>
         <parameters throws="1">
-          <parameter name="buffer" type="gpointer"/>
+          <parameter name="buffer" type="void*" array="true" array_length_param_index="1"/>
           <parameter name="count" type="gsize"/>
           <parameter name="bytes_read" type="gsize*" owned="true" pass_as="out"/>
           <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
@@ -9541,7 +10024,7 @@
       <method name="ReadAsync" cname="g_input_stream_read_async">
         <return-type type="void"/>
         <parameters>
-          <parameter name="buffer" type="gpointer"/>
+          <parameter name="buffer" type="void*" array="true" array_length_param_index="1"/>
           <parameter name="count" type="gsize"/>
           <parameter name="io_priority" type="gint"/>
           <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
@@ -9587,6 +10070,9 @@
       </method>
       <method name="SetPending" cname="g_input_stream_set_pending">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="Skip" cname="g_input_stream_skip">
         <return-type type="gssize"/>
@@ -9720,22 +10206,28 @@
       <method name="GetType" cname="g_memory_output_stream_get_type" shared="true">
         <return-type type="GType"/>
       </method>
+      <constructor cname="g_memory_output_stream_new_resizable" disable_void_ctor=""/>
       <method name="GetData" cname="g_memory_output_stream_get_data">
         <return-type type="gpointer"/>
+        <parameters/>
       </method>
       <method name="GetDataSize" cname="g_memory_output_stream_get_data_size">
         <return-type type="gsize"/>
+        <parameters/>
       </method>
       <method name="GetSize" cname="g_memory_output_stream_get_size">
         <return-type type="gsize"/>
+        <parameters/>
       </method>
       <method name="StealAsBytes" cname="g_memory_output_stream_steal_as_bytes">
         <return-type type="GBytes*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="StealData" cname="g_memory_output_stream_steal_data">
         <return-type type="gpointer*" owned="true"/>
+        <parameters/>
       </method>
       <property name="Data" cname="data" type="gpointer" readable="true" writeable="true" construct="false" construct-only="true"/>
       <property name="DataSize" cname="data-size" type="gulong" readable="true" writeable="false" construct="false" construct-only="false"/>
@@ -9781,6 +10273,7 @@
       </method>
       <method name="Freeze" cname="g_menu_freeze">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Insert" cname="g_menu_insert">
         <return-type type="void"/>
@@ -9860,7 +10353,7 @@
       <virtual_method name="GetNext" cname="get_next">
         <return-type type="gboolean"/>
         <parameters>
-          <parameter name="out_type" type="const-gchar*"/>
+          <parameter allow-none="1" name="out_name" type="const-gchar*" pass_as="out"/>
           <parameter allow-none="1" name="value" type="GVariant**" owned="true" pass_as="out">
             <warning>missing glib:type-name</warning>
           </parameter>
@@ -9868,6 +10361,7 @@
       </virtual_method>
       <method name="GetName" cname="g_menu_attribute_iter_get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetNext" cname="g_menu_attribute_iter_get_next">
         <return-type type="gboolean"/>
@@ -9882,9 +10376,11 @@
         <return-type type="GVariant*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Next" cname="g_menu_attribute_iter_next">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GObject*"/>
       <field cname="priv" access="public" writeable="false" readable="true" name="Priv" type="GMenuAttributeIterPrivate*">
@@ -9999,12 +10495,13 @@
       <virtual_method name="GetNext" cname="get_next">
         <return-type type="gboolean"/>
         <parameters>
-          <parameter name="out_name" type="const-gchar*"/>
+          <parameter allow-none="1" name="out_link" type="const-gchar*" pass_as="out"/>
           <parameter allow-none="1" name="value" type="GMenuModel*" owned="true" pass_as="out"/>
         </parameters>
       </virtual_method>
       <method name="GetName" cname="g_menu_link_iter_get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetNext" cname="g_menu_link_iter_get_next">
         <return-type type="gboolean"/>
@@ -10015,9 +10512,11 @@
       </method>
       <method name="GetValue" cname="g_menu_link_iter_get_value">
         <return-type type="GMenuModel*" owned="true"/>
+        <parameters/>
       </method>
       <method name="Next" cname="g_menu_link_iter_next">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GObject*"/>
       <field cname="priv" access="public" writeable="false" readable="true" name="Priv" type="GMenuLinkIterPrivate*">
@@ -10076,9 +10575,11 @@
       </virtual_method>
       <virtual_method name="GetNItems" cname="get_n_items">
         <return-type type="gint"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="IsMutable" cname="is_mutable">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="IterateItemAttributes" cname="iterate_item_attributes">
         <return-type type="GMenuAttributeIter*" owned="true"/>
@@ -10113,9 +10614,11 @@
       </method>
       <method name="GetNItems" cname="g_menu_model_get_n_items">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="IsMutable" cname="g_menu_model_is_mutable">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IterateItemAttributes" cname="g_menu_model_iterate_item_attributes">
         <return-type type="GMenuAttributeIter*" owned="true"/>
@@ -10196,21 +10699,27 @@
       <constructor cname="g_mount_operation_new" disable_void_ctor=""/>
       <method name="GetAnonymous" cname="g_mount_operation_get_anonymous">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetChoice" cname="g_mount_operation_get_choice">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="GetDomain" cname="g_mount_operation_get_domain">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetPassword" cname="g_mount_operation_get_password">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetPasswordSave" cname="g_mount_operation_get_password_save">
         <return-type type="GPasswordSave"/>
+        <parameters/>
       </method>
       <method name="GetUsername" cname="g_mount_operation_get_username">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="SetAnonymous" cname="g_mount_operation_set_anonymous">
         <return-type type="void"/>
@@ -10356,12 +10865,15 @@
       </method>
       <method name="GetHostname" cname="g_network_address_get_hostname">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetPort" cname="g_network_address_get_port">
         <return-type type="guint16"/>
+        <parameters/>
       </method>
       <method name="GetScheme" cname="g_network_address_get_scheme">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <property name="Hostname" cname="hostname" type="gchar*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <property name="Port" cname="port" type="guint" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -10392,15 +10904,19 @@
       </constructor>
       <method name="GetDomain" cname="g_network_service_get_domain">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetProtocol" cname="g_network_service_get_protocol">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetScheme" cname="g_network_service_get_scheme">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetService" cname="g_network_service_get_service">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="SetScheme" cname="g_network_service_set_scheme">
         <return-type type="void"/>
@@ -10572,6 +11088,7 @@
       </virtual_method>
       <method name="ClearPending" cname="g_output_stream_clear_pending">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Close" cname="g_output_stream_close">
         <return-type type="gboolean"/>
@@ -10621,15 +11138,21 @@
       </method>
       <method name="HasPending" cname="g_output_stream_has_pending">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsClosed" cname="g_output_stream_is_closed">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsClosing" cname="g_output_stream_is_closing">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="SetPending" cname="g_output_stream_set_pending">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="Splice" cname="g_output_stream_splice">
         <return-type type="gssize"/>
@@ -10813,12 +11336,15 @@
       </method>
       <method name="GetAllowed" cname="g_permission_get_allowed">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetCanAcquire" cname="g_permission_get_can_acquire">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetCanRelease" cname="g_permission_get_can_release">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="ImplUpdate" cname="g_permission_impl_update">
         <return-type type="void"/>
@@ -10883,24 +11409,31 @@
       </constructor>
       <method name="GetDestinationHostname" cname="g_proxy_address_get_destination_hostname">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetDestinationPort" cname="g_proxy_address_get_destination_port">
         <return-type type="guint16"/>
+        <parameters/>
       </method>
       <method name="GetDestinationProtocol" cname="g_proxy_address_get_destination_protocol">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetPassword" cname="g_proxy_address_get_password">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetProtocol" cname="g_proxy_address_get_protocol">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetUri" cname="g_proxy_address_get_uri">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetUsername" cname="g_proxy_address_get_username">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <property name="DestinationHostname" cname="destination-hostname" type="gchar*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <property name="DestinationPort" cname="destination-port" type="guint" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -10952,6 +11485,7 @@
         <return-type type="GType"/>
       </method>
       <property name="Connectable" cname="connectable" type="GSocketConnectable*" readable="true" writeable="true" construct="false" construct-only="true"/>
+      <property name="ProxyResolver" cname="proxy-resolver" type="GProxyResolver*" readable="true" writeable="true" construct="true" construct-only="false"/>
       <property name="Uri" cname="uri" type="gchar*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GSocketAddressEnumerator*"/>
       <field cname="priv" access="public" writeable="false" readable="true" name="Priv" type="GProxyAddressEnumeratorPrivate*">
@@ -11211,6 +11745,7 @@
       </method>
       <method name="SetDefault" cname="g_resolver_set_default">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GObject*"/>
       <field cname="priv" access="public" writeable="false" readable="true" name="Priv" type="GResolverPrivate*">
@@ -11292,6 +11827,7 @@
       </method>
       <method name="Apply" cname="g_settings_apply">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Bind" cname="g_settings_bind">
         <return-type type="void"/>
@@ -11319,6 +11855,7 @@
       </method>
       <method name="Delay" cname="g_settings_delay">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GetBoolean" cname="g_settings_get_boolean">
         <return-type type="gboolean"/>
@@ -11352,6 +11889,7 @@
       </method>
       <method name="GetHasUnapplied" cname="g_settings_get_has_unapplied">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetInt" cname="g_settings_get_int">
         <return-type type="gint"/>
@@ -11409,9 +11947,11 @@
       </method>
       <method name="ListChildren" cname="g_settings_list_children">
         <return-type type="gchar***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="ListKeys" cname="g_settings_list_keys">
         <return-type type="gchar***" owned="true" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="RangeCheck" cname="g_settings_range_check">
         <return-type type="gboolean"/>
@@ -11430,6 +11970,7 @@
       </method>
       <method name="Revert" cname="g_settings_revert">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="SetBoolean" cname="g_settings_set_boolean">
         <return-type type="gboolean"/>
@@ -11509,7 +12050,7 @@
       <signal name="ChangeEvent" cname="change-event" when="last" field_name="change_event">
         <return-type type="gboolean"/>
         <parameters>
-          <parameter allow-none="1" name="keys" type="" array="true" array_length_param_index="1"/>
+          <parameter allow-none="1" name="keys" type="gpointer" array="true" array_length_param_index="1"/>
           <parameter name="n_keys" type="gint"/>
         </parameters>
       </signal>
@@ -11676,18 +12217,25 @@
       </method>
       <method name="Complete" cname="g_simple_async_result_complete">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="CompleteInIdle" cname="g_simple_async_result_complete_in_idle">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GetOpResGboolean" cname="g_simple_async_result_get_op_res_gboolean">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetOpResGssize" cname="g_simple_async_result_get_op_res_gssize">
         <return-type type="gssize"/>
+        <parameters/>
       </method>
       <method name="PropagateError" cname="g_simple_async_result_propagate_error">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="SetCheckCancellable" cname="g_simple_async_result_set_check_cancellable">
         <return-type type="void"/>
@@ -11731,6 +12279,63 @@
           <parameter name="allowed" type="gboolean"/>
         </parameters>
       </constructor>
+    </object>
+    <object name="SimpleProxyResolver" cname="GSimpleProxyResolver" abstract="false" opaque="false" hidden="false" parent="GObject">
+      <implements>
+        <interface cname="GProxyResolver"/>
+      </implements>
+      <class_struct cname="GSimpleProxyResolverClass">
+        <field cname="parent_class" access="public" writeable="false" readable="true" name="ParentClass" type="GObjectClass">
+          <warning>missing glib:type-name</warning>
+        </field>
+        <method vm="_g_reserved1"/>
+        <method vm="_g_reserved2"/>
+        <method vm="_g_reserved3"/>
+        <method vm="_g_reserved4"/>
+        <method vm="_g_reserved5"/>
+      </class_struct>
+      <virtual_method name="_gGReserved1" cname="_g_reserved1" shared="true" hidden="true">
+        <return-type type="void"/>
+      </virtual_method>
+      <virtual_method name="_gGReserved2" cname="_g_reserved2" shared="true" hidden="true">
+        <return-type type="void"/>
+      </virtual_method>
+      <virtual_method name="_gGReserved3" cname="_g_reserved3" shared="true" hidden="true">
+        <return-type type="void"/>
+      </virtual_method>
+      <virtual_method name="_gGReserved4" cname="_g_reserved4" shared="true" hidden="true">
+        <return-type type="void"/>
+      </virtual_method>
+      <virtual_method name="_gGReserved5" cname="_g_reserved5" shared="true" hidden="true">
+        <return-type type="void"/>
+      </virtual_method>
+      <method name="GetType" cname="g_simple_proxy_resolver_get_type" shared="true">
+        <return-type type="GType"/>
+      </method>
+      <method name="SetDefaultProxy" cname="g_simple_proxy_resolver_set_default_proxy">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="default_proxy" type="const-gchar*"/>
+        </parameters>
+      </method>
+      <method name="SetIgnoreHosts" cname="g_simple_proxy_resolver_set_ignore_hosts">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="ignore_hosts" type="const-gchar*"/>
+        </parameters>
+      </method>
+      <method name="SetUriProxy" cname="g_simple_proxy_resolver_set_uri_proxy">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="uri_scheme" type="const-gchar*"/>
+          <parameter name="proxy" type="const-gchar*"/>
+        </parameters>
+      </method>
+      <property name="DefaultProxy" cname="default-proxy" type="gchar*" readable="true" writeable="true" construct="false" construct-only="false"/>
+      <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GObject*"/>
+      <field cname="priv" access="private" writeable="false" readable="false" name="Priv" type="GSimpleProxyResolverPrivate*">
+        <warning>missing glib:type-name</warning>
+      </field>
     </object>
     <object name="Socket" cname="GSocket" abstract="false" opaque="false" hidden="false" parent="GObject">
       <implements>
@@ -11813,9 +12418,15 @@
       </method>
       <method name="CheckConnectResult" cname="g_socket_check_connect_result">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="Close" cname="g_socket_close">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="ConditionCheck" cname="g_socket_condition_check">
         <return-type type="GIOCondition"/>
@@ -11850,60 +12461,94 @@
       </method>
       <method name="ConnectionFactoryCreateConnection" cname="g_socket_connection_factory_create_connection">
         <return-type type="GSocketConnection*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetAvailableBytes" cname="g_socket_get_available_bytes">
         <return-type type="gssize"/>
+        <parameters/>
       </method>
       <method name="GetBlocking" cname="g_socket_get_blocking">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetBroadcast" cname="g_socket_get_broadcast">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetCredentials" cname="g_socket_get_credentials">
         <return-type type="GCredentials*" owned="true"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="GetFamily" cname="g_socket_get_family">
         <return-type type="GSocketFamily"/>
+        <parameters/>
       </method>
       <method name="GetFd" cname="g_socket_get_fd">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="GetKeepalive" cname="g_socket_get_keepalive">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetListenBacklog" cname="g_socket_get_listen_backlog">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="GetLocalAddress" cname="g_socket_get_local_address">
         <return-type type="GSocketAddress*" owned="true"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="GetMulticastLoopback" cname="g_socket_get_multicast_loopback">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetMulticastTtl" cname="g_socket_get_multicast_ttl">
         <return-type type="guint"/>
+        <parameters/>
+      </method>
+      <method name="GetOption" cname="g_socket_get_option">
+        <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="level" type="gint"/>
+          <parameter name="optname" type="gint"/>
+          <parameter name="value" type="gint*" owned="true" pass_as="out"/>
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="GetProtocol" cname="g_socket_get_protocol">
         <return-type type="GSocketProtocol"/>
+        <parameters/>
       </method>
       <method name="GetRemoteAddress" cname="g_socket_get_remote_address">
         <return-type type="GSocketAddress*" owned="true"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="GetSocketType" cname="g_socket_get_socket_type">
         <return-type type="GSocketType"/>
+        <parameters/>
       </method>
       <method name="GetTimeout" cname="g_socket_get_timeout">
         <return-type type="guint"/>
+        <parameters/>
       </method>
       <method name="GetTtl" cname="g_socket_get_ttl">
         <return-type type="guint"/>
+        <parameters/>
       </method>
       <method name="IsClosed" cname="g_socket_is_closed">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsConnected" cname="g_socket_is_connected">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="JoinMulticastGroup" cname="g_socket_join_multicast_group">
         <return-type type="gboolean"/>
@@ -11925,11 +12570,14 @@
       </method>
       <method name="Listen" cname="g_socket_listen">
         <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="Receive" cname="g_socket_receive">
         <return-type type="gssize"/>
         <parameters throws="1">
-          <parameter name="buffer" type="const-gchar*"/>
+          <parameter name="buffer" type="const-gchar*" array="true" array_length_param_index="1"/>
           <parameter name="size" type="gsize"/>
           <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
           <parameter name="error" type="GError**"/>
@@ -11961,7 +12609,7 @@
       <method name="ReceiveWithBlocking" cname="g_socket_receive_with_blocking">
         <return-type type="gssize"/>
         <parameters throws="1">
-          <parameter name="buffer" type="const-gchar*"/>
+          <parameter name="buffer" type="const-gchar*" array="true" array_length_param_index="1"/>
           <parameter name="size" type="gsize"/>
           <parameter name="blocking" type="gboolean"/>
           <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
@@ -12046,6 +12694,15 @@
           <parameter name="ttl" type="guint"/>
         </parameters>
       </method>
+      <method name="SetOption" cname="g_socket_set_option">
+        <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="level" type="gint"/>
+          <parameter name="optname" type="gint"/>
+          <parameter name="value" type="gint"/>
+          <parameter name="error" type="GError**"/>
+        </parameters>
+      </method>
       <method name="SetTimeout" cname="g_socket_set_timeout">
         <return-type type="void"/>
         <parameters>
@@ -12068,6 +12725,7 @@
       </method>
       <method name="SpeaksIpv4" cname="g_socket_speaks_ipv4">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <property name="Blocking" cname="blocking" type="gboolean" readable="true" writeable="true" construct="false" construct-only="false"/>
       <property name="Broadcast" cname="broadcast" type="gboolean" readable="true" writeable="true" construct="false" construct-only="false"/>
@@ -12111,9 +12769,11 @@
       </constructor>
       <virtual_method name="GetFamily" cname="get_family">
         <return-type type="GSocketFamily"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetNativeSize" cname="get_native_size">
         <return-type type="gssize"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="ToNative" cname="to_native">
         <return-type type="gboolean"/>
@@ -12125,9 +12785,11 @@
       </virtual_method>
       <method name="GetFamily" cname="g_socket_address_get_family">
         <return-type type="GSocketFamily"/>
+        <parameters/>
       </method>
       <method name="GetNativeSize" cname="g_socket_address_get_native_size">
         <return-type type="gssize"/>
+        <parameters/>
       </method>
       <method name="ToNative" cname="g_socket_address_to_native">
         <return-type type="gboolean"/>
@@ -12335,27 +12997,39 @@
       </method>
       <method name="GetEnableProxy" cname="g_socket_client_get_enable_proxy">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetFamily" cname="g_socket_client_get_family">
         <return-type type="GSocketFamily"/>
+        <parameters/>
       </method>
       <method name="GetLocalAddress" cname="g_socket_client_get_local_address">
         <return-type type="GSocketAddress*"/>
+        <parameters/>
       </method>
       <method name="GetProtocol" cname="g_socket_client_get_protocol">
         <return-type type="GSocketProtocol"/>
+        <parameters/>
+      </method>
+      <method name="GetProxyResolver" cname="g_socket_client_get_proxy_resolver">
+        <return-type type="GProxyResolver*"/>
+        <parameters/>
       </method>
       <method name="GetSocketType" cname="g_socket_client_get_socket_type">
         <return-type type="GSocketType"/>
+        <parameters/>
       </method>
       <method name="GetTimeout" cname="g_socket_client_get_timeout">
         <return-type type="guint"/>
+        <parameters/>
       </method>
       <method name="GetTls" cname="g_socket_client_get_tls">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetTlsValidationFlags" cname="g_socket_client_get_tls_validation_flags">
         <return-type type="GTlsCertificateFlags"/>
+        <parameters/>
       </method>
       <method name="SetEnableProxy" cname="g_socket_client_set_enable_proxy">
         <return-type type="void"/>
@@ -12379,6 +13053,12 @@
         <return-type type="void"/>
         <parameters>
           <parameter name="protocol" type="GSocketProtocol"/>
+        </parameters>
+      </method>
+      <method name="SetProxyResolver" cname="g_socket_client_set_proxy_resolver">
+        <return-type type="void"/>
+        <parameters>
+          <parameter allow-none="1" name="proxy_resolver" type="GProxyResolver*"/>
         </parameters>
       </method>
       <method name="SetSocketType" cname="g_socket_client_set_socket_type">
@@ -12409,6 +13089,7 @@
       <property name="Family" cname="family" type="GSocketFamily" readable="true" writeable="true" construct="true" construct-only="false"/>
       <property name="LocalAddress" cname="local-address" type="GSocketAddress*" readable="true" writeable="true" construct="true" construct-only="false"/>
       <property name="Protocol" cname="protocol" type="GSocketProtocol" readable="true" writeable="true" construct="true" construct-only="false"/>
+      <property name="ProxyResolver" cname="proxy-resolver" type="GProxyResolver*" readable="true" writeable="true" construct="true" construct-only="false"/>
       <property name="Timeout" cname="timeout" type="guint" readable="true" writeable="true" construct="true" construct-only="false"/>
       <property name="Tls" cname="tls" type="gboolean" readable="true" writeable="true" construct="true" construct-only="false"/>
       <property name="TlsValidationFlags" cname="tls-validation-flags" type="GTlsCertificateFlags" readable="true" writeable="true" construct="true" construct-only="false"/>
@@ -12502,15 +13183,23 @@
       </method>
       <method name="GetLocalAddress" cname="g_socket_connection_get_local_address">
         <return-type type="GSocketAddress*" owned="true"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="GetRemoteAddress" cname="g_socket_connection_get_remote_address">
         <return-type type="GSocketAddress*" owned="true"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
       </method>
       <method name="GetSocket" cname="g_socket_connection_get_socket">
         <return-type type="GSocket*"/>
+        <parameters/>
       </method>
       <method name="IsConnected" cname="g_socket_connection_is_connected">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <property name="Socket" cname="socket" type="GSocket*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GIOStream*"/>
@@ -12572,12 +13261,15 @@
       </method>
       <virtual_method name="GetLevel" cname="get_level">
         <return-type type="gint"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetSize" cname="get_size">
         <return-type type="gsize"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetType" cname="get_type">
         <return-type type="gint"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="Serialize" cname="serialize">
         <return-type type="void"/>
@@ -12587,12 +13279,15 @@
       </virtual_method>
       <method name="GetLevel" cname="g_socket_control_message_get_level">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="GetMsgType" cname="g_socket_control_message_get_msg_type">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="GetSize" cname="g_socket_control_message_get_size">
         <return-type type="gsize"/>
+        <parameters/>
       </method>
       <method name="Serialize" cname="g_socket_control_message_serialize">
         <return-type type="void"/>
@@ -12642,6 +13337,7 @@
       <constructor cname="g_socket_listener_new" disable_void_ctor=""/>
       <virtual_method name="Changed" cname="changed">
         <return-type type="void"/>
+        <parameters/>
       </virtual_method>
       <method name="Accept" cname="g_socket_listener_accept">
         <return-type type="GSocketConnection*" owned="true"/>
@@ -12727,6 +13423,7 @@
       </method>
       <method name="Close" cname="g_socket_listener_close">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="SetBacklog" cname="g_socket_listener_set_backlog">
         <return-type type="void"/>
@@ -12777,12 +13474,15 @@
       <constructor cname="g_socket_service_new" disable_void_ctor=""/>
       <method name="IsActive" cname="g_socket_service_is_active">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Start" cname="g_socket_service_start">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Stop" cname="g_socket_service_stop">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GSocketListener*"/>
       <field cname="priv" access="public" writeable="false" readable="true" name="Priv" type="GSocketServicePrivate*">
@@ -12796,6 +13496,160 @@
         </parameters>
       </signal>
     </object>
+    <object name="Task" cname="GTask" abstract="false" opaque="false" hidden="false" parent="GObject">
+      <implements>
+        <interface cname="GAsyncResult"/>
+      </implements>
+      <class_struct cname="GTaskClass"/>
+      <method name="GetType" cname="g_task_get_type" shared="true">
+        <return-type type="GType"/>
+      </method>
+      <constructor cname="g_task_new">
+        <parameters>
+          <parameter name="source_object" type="GObject*"/>
+          <parameter name="cancellable" type="GCancellable*"/>
+          <parameter name="callback" type="GAsyncReadyCallback"/>
+          <parameter name="callback_data" type="gpointer"/>
+        </parameters>
+      </constructor>
+      <method name="IsValid" cname="g_task_is_valid" shared="true">
+        <return-type type="gboolean"/>
+        <parameters>
+          <parameter name="_result" type="GAsyncResult*"/>
+          <parameter allow-none="1" name="source_object" type="GObject*"/>
+        </parameters>
+      </method>
+      <method name="ReportError" cname="g_task_report_error" shared="true">
+        <return-type type="void"/>
+        <parameters>
+          <parameter allow-none="1" name="source_object" type="GObject*"/>
+          <parameter closure="2" scope="async" allow-none="1" name="callback" type="GAsyncReadyCallback"/>
+          <parameter name="callback_data" type="gpointer"/>
+          <parameter name="source_tag" type="gpointer"/>
+          <parameter name="error" type="GError*" owned="true">
+            <warning>missing glib:type-name</warning>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="GetCancellable" cname="g_task_get_cancellable">
+        <return-type type="GCancellable*"/>
+        <parameters/>
+      </method>
+      <method name="GetCheckCancellable" cname="g_task_get_check_cancellable">
+        <return-type type="gboolean"/>
+        <parameters/>
+      </method>
+      <method name="GetContext" cname="g_task_get_context">
+        <return-type type="GMainContext*">
+          <warning>missing glib:type-name</warning>
+        </return-type>
+        <parameters/>
+      </method>
+      <method name="GetPriority" cname="g_task_get_priority">
+        <return-type type="gint"/>
+        <parameters/>
+      </method>
+      <method name="GetReturnOnCancel" cname="g_task_get_return_on_cancel">
+        <return-type type="gboolean"/>
+        <parameters/>
+      </method>
+      <method name="GetSourceObject" cname="g_task_get_source_object">
+        <return-type type="GObject*"/>
+        <parameters/>
+      </method>
+      <method name="GetSourceTag" cname="g_task_get_source_tag">
+        <return-type type="gpointer"/>
+        <parameters/>
+      </method>
+      <method name="GetTaskData" cname="g_task_get_task_data">
+        <return-type type="gpointer"/>
+        <parameters/>
+      </method>
+      <method name="HadError" cname="g_task_had_error">
+        <return-type type="gboolean"/>
+        <parameters/>
+      </method>
+      <method name="PropagateBoolean" cname="g_task_propagate_boolean">
+        <return-type type="gboolean"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
+      </method>
+      <method name="PropagateInt" cname="g_task_propagate_int">
+        <return-type type="gssize"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
+      </method>
+      <method name="PropagatePointer" cname="g_task_propagate_pointer">
+        <return-type type="gpointer*" owned="true"/>
+        <parameters throws="1">
+          <parameter name="error" type="GError**"/>
+        </parameters>
+      </method>
+      <method name="ReturnBoolean" cname="g_task_return_boolean">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="_result" type="gboolean"/>
+        </parameters>
+      </method>
+      <method name="ReturnError" cname="g_task_return_error">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="error" type="GError*" owned="true">
+            <warning>missing glib:type-name</warning>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="ReturnErrorIfCancelled" cname="g_task_return_error_if_cancelled">
+        <return-type type="gboolean"/>
+        <parameters/>
+      </method>
+      <method name="ReturnInt" cname="g_task_return_int">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="_result" type="gssize"/>
+        </parameters>
+      </method>
+      <method name="ReturnPointer" cname="g_task_return_pointer">
+        <return-type type="void"/>
+        <parameters>
+          <parameter allow-none="1" name="_result" type="gpointer*" owned="true"/>
+          <parameter scope="async" allow-none="1" name="result_destroy" type="GDestroyNotify"/>
+        </parameters>
+      </method>
+      <method name="SetCheckCancellable" cname="g_task_set_check_cancellable">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="check_cancellable" type="gboolean"/>
+        </parameters>
+      </method>
+      <method name="SetPriority" cname="g_task_set_priority">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="priority" type="gint"/>
+        </parameters>
+      </method>
+      <method name="SetReturnOnCancel" cname="g_task_set_return_on_cancel">
+        <return-type type="gboolean"/>
+        <parameters>
+          <parameter name="return_on_cancel" type="gboolean"/>
+        </parameters>
+      </method>
+      <method name="SetSourceTag" cname="g_task_set_source_tag">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="source_tag" type="gpointer"/>
+        </parameters>
+      </method>
+      <method name="SetTaskData" cname="g_task_set_task_data">
+        <return-type type="void"/>
+        <parameters>
+          <parameter allow-none="1" name="task_data" type="gpointer"/>
+          <parameter scope="async" allow-none="1" name="task_data_destroy" type="GDestroyNotify"/>
+        </parameters>
+      </method>
+    </object>
     <object name="TcpConnection" cname="GTcpConnection" abstract="false" opaque="false" hidden="false" parent="GSocketConnection">
       <class_struct cname="GTcpConnectionClass">
         <field cname="parent_class" access="public" writeable="false" readable="true" name="ParentClass" type="GSocketConnectionClass">
@@ -12807,6 +13661,7 @@
       </method>
       <method name="GetGracefulDisconnect" cname="g_tcp_connection_get_graceful_disconnect">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="SetGracefulDisconnect" cname="g_tcp_connection_set_graceful_disconnect">
         <return-type type="void"/>
@@ -12837,6 +13692,7 @@
       </constructor>
       <method name="GetBaseIoStream" cname="g_tcp_wrapper_connection_get_base_io_stream">
         <return-type type="GIOStream*"/>
+        <parameters/>
       </method>
       <property name="BaseIoStream" cname="base-io-stream" type="GIOStream*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GTcpConnection*"/>
@@ -12864,18 +13720,23 @@
       </method>
       <method name="Down" cname="g_test_dbus_down">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GetBusAddress" cname="g_test_dbus_get_bus_address">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetFlags" cname="g_test_dbus_get_flags">
         <return-type type="GTestDBusFlags"/>
+        <parameters/>
       </method>
       <method name="Stop" cname="g_test_dbus_stop">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Up" cname="g_test_dbus_up">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <property name="Flags" cname="flags" type="GTestDBusFlags" readable="true" writeable="true" construct="false" construct-only="true"/>
     </object>
@@ -12911,6 +13772,7 @@
       </method>
       <method name="GetNames" cname="g_themed_icon_get_names">
         <return-type type="const gchar* const*" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="PrependName" cname="g_themed_icon_prepend_name">
         <return-type type="void"/>
@@ -13013,6 +13875,7 @@
       </virtual_method>
       <method name="GetIssuer" cname="g_tls_certificate_get_issuer">
         <return-type type="GTlsCertificate*"/>
+        <parameters/>
       </method>
       <method name="IsSame" cname="g_tls_certificate_is_same">
         <return-type type="gboolean"/>
@@ -13081,27 +13944,35 @@
       </method>
       <method name="GetCertificate" cname="g_tls_connection_get_certificate">
         <return-type type="GTlsCertificate*"/>
+        <parameters/>
       </method>
       <method name="GetDatabase" cname="g_tls_connection_get_database">
         <return-type type="GTlsDatabase*"/>
+        <parameters/>
       </method>
       <method name="GetInteraction" cname="g_tls_connection_get_interaction">
         <return-type type="GTlsInteraction*"/>
+        <parameters/>
       </method>
       <method name="GetPeerCertificate" cname="g_tls_connection_get_peer_certificate">
         <return-type type="GTlsCertificate*"/>
+        <parameters/>
       </method>
       <method name="GetPeerCertificateErrors" cname="g_tls_connection_get_peer_certificate_errors">
         <return-type type="GTlsCertificateFlags"/>
+        <parameters/>
       </method>
       <method name="GetRehandshakeMode" cname="g_tls_connection_get_rehandshake_mode">
         <return-type type="GTlsRehandshakeMode"/>
+        <parameters/>
       </method>
       <method name="GetRequireCloseNotify" cname="g_tls_connection_get_require_close_notify">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetUseSystemCertdb" cname="g_tls_connection_get_use_system_certdb" deprecated="true">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="Handshake" cname="g_tls_connection_handshake">
         <return-type type="gboolean"/>
@@ -13289,8 +14160,8 @@
           <parameter closure="5" name="user_data" type="gpointer"/>
         </parameters>
       </virtual_method>
-      <virtual_method name="LookupCertificatesIssuedByFinish" cname="lookup_certificates_issued_by_finish" hidden="true">
-        <return-type type="GList*" element_type="gpointer" elements_owned="true" owned="true"/>
+      <virtual_method name="LookupCertificatesIssuedByFinish" cname="lookup_certificates_issued_by_finish">
+        <return-type type="GList*" element_type="GTlsCertificate*" elements_owned="true" owned="true"/>
         <parameters throws="1">
           <parameter name="_result" type="GAsyncResult*"/>
           <parameter name="error" type="GError**"/>
@@ -13409,6 +14280,13 @@
           <parameter allow-none="1" name="cancellable" type="GCancellable*"/>
           <parameter closure="5" scope="async" allow-none="1" name="callback" type="GAsyncReadyCallback"/>
           <parameter name="user_data" type="gpointer"/>
+        </parameters>
+      </method>
+      <method name="LookupCertificatesIssuedByFinish" cname="g_tls_database_lookup_certificates_issued_by_finish">
+        <return-type type="GList*" element_type="GTlsCertificate*" elements_owned="true" owned="true"/>
+        <parameters throws="1">
+          <parameter name="_result" type="GAsyncResult*"/>
+          <parameter name="error" type="GError**"/>
         </parameters>
       </method>
       <method name="VerifyChain" cname="g_tls_database_verify_chain">
@@ -13543,6 +14421,7 @@
       </constructor>
       <virtual_method name="GetDefaultWarning" cname="get_default_warning">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetValue" cname="get_value">
         <return-type type="guint8"/>
@@ -13560,9 +14439,11 @@
       </virtual_method>
       <method name="GetDescription" cname="g_tls_password_get_description">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetFlags" cname="g_tls_password_get_flags">
         <return-type type="GTlsPasswordFlags"/>
+        <parameters/>
       </method>
       <method name="GetValue" cname="g_tls_password_get_value">
         <return-type type="guint8"/>
@@ -13572,6 +14453,7 @@
       </method>
       <method name="GetWarning" cname="g_tls_password_get_warning">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="SetDescription" cname="g_tls_password_set_description">
         <return-type type="void"/>
@@ -13715,6 +14597,7 @@
       </method>
       <method name="GetCredentials" cname="g_unix_credentials_message_get_credentials">
         <return-type type="GCredentials*"/>
+        <parameters/>
       </method>
       <property name="Credentials" cname="credentials" type="GCredentials*" readable="true" writeable="true" construct="false" construct-only="true"/>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GSocketControlMessage*"/>
@@ -13774,6 +14657,7 @@
       </method>
       <method name="GetLength" cname="g_unix_fd_list_get_length">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="PeekFds" cname="g_unix_fd_list_peek_fds">
         <return-type type="gint*" array="true" array_length_param_index="0"/>
@@ -13824,6 +14708,7 @@
       </method>
       <method name="GetFdList" cname="g_unix_fd_message_get_fd_list">
         <return-type type="GUnixFDList*"/>
+        <parameters/>
       </method>
       <method name="StealFds" cname="g_unix_fd_message_steal_fds">
         <return-type type="gint**" owned="true" array="true" array_length_param_index="0"/>
@@ -13878,9 +14763,11 @@
       </constructor>
       <method name="GetCloseFd" cname="g_unix_input_stream_get_close_fd">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetFd" cname="g_unix_input_stream_get_fd">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="SetCloseFd" cname="g_unix_input_stream_set_close_fd">
         <return-type type="void"/>
@@ -13957,9 +14844,11 @@
       </constructor>
       <method name="GetCloseFd" cname="g_unix_output_stream_get_close_fd">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetFd" cname="g_unix_output_stream_get_fd">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="SetCloseFd" cname="g_unix_output_stream_set_close_fd">
         <return-type type="void"/>
@@ -14009,15 +14898,19 @@
       </method>
       <method name="GetAddressType" cname="g_unix_socket_address_get_address_type">
         <return-type type="GUnixSocketAddressType"/>
+        <parameters/>
       </method>
       <method name="GetIsAbstract" cname="g_unix_socket_address_get_is_abstract" deprecated="true">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GetPath" cname="g_unix_socket_address_get_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetPathLen" cname="g_unix_socket_address_get_path_len">
         <return-type type="gsize"/>
+        <parameters/>
       </method>
       <property name="Abstract" cname="abstract" type="gboolean" readable="true" writeable="true" construct="false" construct-only="true"/>
       <property name="AddressType" cname="address-type" type="GUnixSocketAddressType" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -14102,9 +14995,11 @@
       </virtual_method>
       <virtual_method name="GetSupportedUriSchemes" cname="get_supported_uri_schemes">
         <return-type type="const gchar* const*" array="true" null_term_array="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="IsActive" cname="is_active">
         <return-type type="gboolean"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="LocalFileAddInfo" cname="local_file_add_info">
         <return-type type="void"/>
@@ -14163,9 +15058,11 @@
       </method>
       <method name="GetSupportedUriSchemes" cname="g_vfs_get_supported_uri_schemes">
         <return-type type="const gchar* const*" array="true" null_term_array="true"/>
+        <parameters/>
       </method>
       <method name="IsActive" cname="g_vfs_is_active">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="ParseName" cname="g_vfs_parse_name">
         <return-type type="GFile*" owned="true"/>
@@ -14248,6 +15145,7 @@
       </method>
       <virtual_method name="GetConnectedDrives" cname="get_connected_drives">
         <return-type type="GList*" element_type="GDrive*" elements_owned="true" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetMountForUuid" cname="get_mount_for_uuid">
         <return-type type="GMount*" owned="true"/>
@@ -14257,6 +15155,7 @@
       </virtual_method>
       <virtual_method name="GetMounts" cname="get_mounts">
         <return-type type="GList*" element_type="GMount*" elements_owned="true" owned="true"/>
+        <parameters/>
       </virtual_method>
       <virtual_method name="GetVolumeForUuid" cname="get_volume_for_uuid">
         <return-type type="GVolume*" owned="true"/>
@@ -14266,9 +15165,11 @@
       </virtual_method>
       <virtual_method name="GetVolumes" cname="get_volumes">
         <return-type type="GList*" element_type="GVolume*" elements_owned="true" owned="true"/>
+        <parameters/>
       </virtual_method>
       <method name="GetConnectedDrives" cname="g_volume_monitor_get_connected_drives">
         <return-type type="GList*" element_type="GDrive*" elements_owned="true" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetMountForUuid" cname="g_volume_monitor_get_mount_for_uuid">
         <return-type type="GMount*" owned="true"/>
@@ -14278,6 +15179,7 @@
       </method>
       <method name="GetMounts" cname="g_volume_monitor_get_mounts">
         <return-type type="GList*" element_type="GMount*" elements_owned="true" owned="true"/>
+        <parameters/>
       </method>
       <method name="GetVolumeForUuid" cname="g_volume_monitor_get_volume_for_uuid">
         <return-type type="GVolume*" owned="true"/>
@@ -14287,6 +15189,7 @@
       </method>
       <method name="GetVolumes" cname="g_volume_monitor_get_volumes">
         <return-type type="GList*" element_type="GVolume*" elements_owned="true" owned="true"/>
+        <parameters/>
       </method>
       <field cname="parent_instance" access="public" writeable="false" readable="true" name="ParentInstance" type="GObject*"/>
       <field cname="priv" access="private" writeable="false" readable="false" name="Priv" type="gpointer"/>
@@ -14383,6 +15286,7 @@
       </constructor>
       <method name="GetFileInfo" cname="g_zlib_compressor_get_file_info">
         <return-type type="GFileInfo*"/>
+        <parameters/>
       </method>
       <method name="SetFileInfo" cname="g_zlib_compressor_set_file_info">
         <return-type type="void"/>
@@ -14413,6 +15317,7 @@
       </constructor>
       <method name="GetFileInfo" cname="g_zlib_decompressor_get_file_info">
         <return-type type="GFileInfo*"/>
+        <parameters/>
       </method>
       <property name="FileInfo" cname="file-info" type="GFileInfo*" readable="true" writeable="false" construct="false" construct-only="false"/>
       <property name="Format" cname="format" type="GZlibCompressorFormat" readable="true" writeable="true" construct="false" construct-only="true"/>
@@ -14443,9 +15348,11 @@
         <return-type type="GDBusAnnotationInfo*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_dbus_annotation_info_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Lookup" cname="g_dbus_annotation_info_lookup" shared="true">
         <return-type type="const-gchar*"/>
@@ -14467,9 +15374,11 @@
         <return-type type="GDBusArgInfo*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_dbus_arg_info_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </boxed>
     <struct name="DBusErrorEntry" cname="GDBusErrorEntry" opaque="false" hidden="false">
@@ -14488,9 +15397,11 @@
       <field cname="annotations" access="public" writeable="true" readable="true" name="Annotations" type="GDBusAnnotationInfo**" array="true" null_term_array="true"/>
       <method name="CacheBuild" cname="g_dbus_interface_info_cache_build">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="CacheRelease" cname="g_dbus_interface_info_cache_release">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GenerateXml" cname="g_dbus_interface_info_generate_xml">
         <return-type type="void"/>
@@ -14529,9 +15440,11 @@
         <return-type type="GDBusInterfaceInfo*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_dbus_interface_info_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </boxed>
     <struct name="DBusInterfaceSkeletonPrivate" cname="GDBusInterfaceSkeletonPrivate" opaque="true" hidden="true"/>
@@ -14554,9 +15467,11 @@
         <return-type type="GDBusMethodInfo*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_dbus_method_info_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </boxed>
     <boxed name="DBusNodeInfo" cname="GDBusNodeInfo" opaque="false" hidden="false">
@@ -14594,9 +15509,11 @@
         <return-type type="GDBusNodeInfo*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_dbus_node_info_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </boxed>
     <struct name="DBusObjectManagerClientPrivate" cname="GDBusObjectManagerClientPrivate" opaque="true" hidden="true"/>
@@ -14616,9 +15533,11 @@
         <return-type type="GDBusPropertyInfo*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_dbus_property_info_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </boxed>
     <struct name="DBusProxyPrivate" cname="GDBusProxyPrivate" opaque="true" hidden="true"/>
@@ -14634,9 +15553,11 @@
         <return-type type="GDBusSignalInfo*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_dbus_signal_info_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </boxed>
     <struct name="DBusSubtreeVTable" cname="GDBusSubtreeVTable" opaque="false" hidden="false">
@@ -14674,6 +15595,7 @@
         <return-type type="GFileAttributeInfoList*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Lookup" cname="g_file_attribute_info_list_lookup">
         <return-type type="GFileAttributeInfo*">
@@ -14687,9 +15609,11 @@
         <return-type type="GFileAttributeInfoList*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_file_attribute_info_list_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </boxed>
     <boxed name="FileAttributeMatcher" cname="GFileAttributeMatcher" opaque="false" hidden="false">
@@ -14709,6 +15633,7 @@
       </method>
       <method name="EnumerateNext" cname="g_file_attribute_matcher_enumerate_next">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="Matches" cname="g_file_attribute_matcher_matches">
         <return-type type="gboolean"/>
@@ -14726,6 +15651,7 @@
         <return-type type="GFileAttributeMatcher*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Subtract" cname="g_file_attribute_matcher_subtract">
         <return-type type="GFileAttributeMatcher*" owned="true">
@@ -14739,9 +15665,11 @@
       </method>
       <method name="ToString" cname="g_file_attribute_matcher_to_string">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_file_attribute_matcher_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </boxed>
     <struct name="FileEnumeratorPrivate" cname="GFileEnumeratorPrivate" opaque="true" hidden="true"/>
@@ -14752,12 +15680,15 @@
     <struct name="IOExtension" cname="GIOExtension" opaque="true" hidden="false">
       <method name="GetName" cname="g_io_extension_get_name">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetPriority" cname="g_io_extension_get_priority">
         <return-type type="gint"/>
+        <parameters/>
       </method>
       <method name="GetType" cname="g_io_extension_get_type">
         <return-type type="GType"/>
+        <parameters/>
       </method>
     </struct>
     <struct name="IOExtensionPoint" cname="GIOExtensionPoint" opaque="true" hidden="false">
@@ -14773,9 +15704,11 @@
         <return-type type="GList*" element_type="GList*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="GetRequiredType" cname="g_io_extension_point_get_required_type">
         <return-type type="GType"/>
+        <parameters/>
       </method>
       <method name="SetRequiredType" cname="g_io_extension_point_set_required_type">
         <return-type type="void"/>
@@ -14820,10 +15753,11 @@
       </method>
       <method name="Free" cname="g_io_module_scope_free">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </struct>
     <struct name="IOSchedulerJob" cname="GIOSchedulerJob" opaque="true" hidden="false">
-      <method name="SendToMainloop" cname="g_io_scheduler_job_send_to_mainloop">
+      <method name="SendToMainloop" cname="g_io_scheduler_job_send_to_mainloop" deprecated="true">
         <return-type type="gboolean"/>
         <parameters>
           <parameter closure="1" destroy="2" scope="notified" name="func" type="GSourceFunc"/>
@@ -14831,7 +15765,7 @@
           <parameter scope="async" allow-none="1" name="notify" type="GDestroyNotify"/>
         </parameters>
       </method>
-      <method name="SendToMainloopAsync" cname="g_io_scheduler_job_send_to_mainloop_async">
+      <method name="SendToMainloopAsync" cname="g_io_scheduler_job_send_to_mainloop_async" deprecated="true">
         <return-type type="void"/>
         <parameters>
           <parameter closure="1" destroy="2" scope="notified" name="func" type="GSourceFunc"/>
@@ -14880,9 +15814,11 @@
       </constructor>
       <method name="_Register" cname="g_resources_register">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="_Unregister" cname="g_resources_unregister">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="EnumerateChildren" cname="g_resource_enumerate_children">
         <return-type type="char***" owned="true" array="true" null_term_array="true"/>
@@ -14924,9 +15860,11 @@
         <return-type type="GResource*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_resource_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="Load" cname="g_resource_load" shared="true">
         <return-type type="GResource*" owned="true">
@@ -14946,17 +15884,21 @@
       </method>
       <method name="GetId" cname="g_settings_schema_get_id">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetPath" cname="g_settings_schema_get_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="Ref" cname="g_settings_schema_ref">
         <return-type type="GSettingsSchema*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_settings_schema_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </boxed>
     <boxed name="SettingsSchemaSource" cname="GSettingsSchemaSource" opaque="true" hidden="false">
@@ -14985,9 +15927,11 @@
         <return-type type="GSettingsSchemaSource*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Unref" cname="g_settings_schema_source_unref">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GetDefault" cname="g_settings_schema_source_get_default" shared="true">
         <return-type type="GSettingsSchemaSource*">
@@ -14996,6 +15940,7 @@
       </method>
     </boxed>
     <struct name="SimpleActionGroupPrivate" cname="GSimpleActionGroupPrivate" opaque="true" hidden="true"/>
+    <struct name="SimpleProxyResolverPrivate" cname="GSimpleProxyResolverPrivate" opaque="true" hidden="true"/>
     <struct name="SocketClientPrivate" cname="GSocketClientPrivate" opaque="true" hidden="true"/>
     <struct name="SocketConnectionPrivate" cname="GSocketConnectionPrivate" opaque="true" hidden="true"/>
     <struct name="SocketControlMessagePrivate" cname="GSocketControlMessagePrivate" opaque="true" hidden="true"/>
@@ -15018,21 +15963,27 @@
         <return-type type="GSrvTarget*" owned="true">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Free" cname="g_srv_target_free">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GetHostname" cname="g_srv_target_get_hostname">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetPort" cname="g_srv_target_get_port">
         <return-type type="guint16"/>
+        <parameters/>
       </method>
       <method name="GetPriority" cname="g_srv_target_get_priority">
         <return-type type="guint16"/>
+        <parameters/>
       </method>
       <method name="GetWeight" cname="g_srv_target_get_weight">
         <return-type type="guint16"/>
+        <parameters/>
       </method>
     </boxed>
     <struct name="StaticResource" cname="GStaticResource" opaque="false" hidden="false">
@@ -15047,14 +15998,17 @@
       <field cname="padding" access="public" writeable="true" readable="true" name="Padding" type="gpointer"/>
       <method name="Fini" cname="g_static_resource_fini">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GetResource" cname="g_static_resource_get_resource">
         <return-type type="GResource*">
           <warning>missing glib:type-name</warning>
         </return-type>
+        <parameters/>
       </method>
       <method name="Init" cname="g_static_resource_init">
         <return-type type="void"/>
+        <parameters/>
       </method>
     </struct>
     <struct name="TcpConnectionPrivate" cname="GTcpConnectionPrivate" opaque="true" hidden="true"/>
@@ -15082,39 +16036,51 @@
       </method>
       <method name="Free" cname="g_unix_mount_point_free">
         <return-type type="void"/>
+        <parameters/>
       </method>
       <method name="GetDevicePath" cname="g_unix_mount_point_get_device_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetFsType" cname="g_unix_mount_point_get_fs_type">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetMountPath" cname="g_unix_mount_point_get_mount_path">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GetOptions" cname="g_unix_mount_point_get_options">
         <return-type type="const-gchar*"/>
+        <parameters/>
       </method>
       <method name="GuessCanEject" cname="g_unix_mount_point_guess_can_eject">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="GuessIcon" cname="g_unix_mount_point_guess_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GuessName" cname="g_unix_mount_point_guess_name">
         <return-type type="gchar*" owned="true"/>
+        <parameters/>
       </method>
       <method name="GuessSymbolicIcon" cname="g_unix_mount_point_guess_symbolic_icon">
         <return-type type="GIcon*" owned="true"/>
+        <parameters/>
       </method>
       <method name="IsLoopback" cname="g_unix_mount_point_is_loopback">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsReadonly" cname="g_unix_mount_point_is_readonly">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
       <method name="IsUserMountable" cname="g_unix_mount_point_is_user_mountable">
         <return-type type="gboolean"/>
+        <parameters/>
       </method>
     </struct>
     <struct name="UnixOutputStreamPrivate" cname="GUnixOutputStreamPrivate" opaque="true" hidden="true"/>
@@ -15415,6 +16381,12 @@
       <method name="ContentTypesGetRegistered" cname="g_content_types_get_registered" shared="true">
         <return-type type="GList*" element_type="gchar*" elements_owned="true" owned="true"/>
       </method>
+      <method name="DbusAddressEscapeValue" cname="g_dbus_address_escape_value" shared="true">
+        <return-type type="gchar*" owned="true"/>
+        <parameters>
+          <parameter name="string" type="const-gchar*"/>
+        </parameters>
+      </method>
       <method name="DbusAddressGetForBusSync" cname="g_dbus_address_get_for_bus_sync" shared="true">
         <return-type type="gchar*" owned="true"/>
         <parameters throws="1">
@@ -15603,6 +16575,13 @@
           <parameter name="arg" type="const-gchar*"/>
         </parameters>
       </method>
+      <method name="FileNewForCommandlineArgAndCwd" cname="g_file_new_for_commandline_arg_and_cwd" shared="true">
+        <return-type type="GFile*" owned="true"/>
+        <parameters>
+          <parameter name="arg" type="const-gchar*"/>
+          <parameter name="cwd" type="const-gchar*"/>
+        </parameters>
+      </method>
       <method name="FileNewForPath" cname="g_file_new_for_path" shared="true">
         <return-type type="GFile*" owned="true"/>
         <parameters>
@@ -15643,7 +16622,7 @@
         </parameters>
       </method>
       <method name="InitableNewv" cname="g_initable_newv" shared="true">
-        <return-type type="gpointer*" owned="true"/>
+        <return-type type="GObject*" owned="true"/>
         <parameters throws="1">
           <parameter name="object_type" type="GType"/>
           <parameter name="n_parameters" type="guint"/>
@@ -15718,10 +16697,10 @@
           </parameter>
         </parameters>
       </method>
-      <method name="IoSchedulerCancelAllJobs" cname="g_io_scheduler_cancel_all_jobs" shared="true">
+      <method name="IoSchedulerCancelAllJobs" cname="g_io_scheduler_cancel_all_jobs" shared="true" deprecated="true">
         <return-type type="void"/>
       </method>
-      <method name="IoSchedulerPushJob" cname="g_io_scheduler_push_job" shared="true">
+      <method name="IoSchedulerPushJob" cname="g_io_scheduler_push_job" shared="true" deprecated="true">
         <return-type type="void"/>
         <parameters>
           <parameter closure="1" destroy="2" scope="notified" name="job_func" type="GIOSchedulerJobFunc"/>
@@ -15733,6 +16712,9 @@
       </method>
       <method name="NetworkMonitorGetDefault" cname="g_network_monitor_get_default" shared="true">
         <return-type type="GNetworkMonitor*"/>
+      </method>
+      <method name="NetworkingInit" cname="g_networking_init" shared="true">
+        <return-type type="void"/>
       </method>
       <method name="PollableSourceNew" cname="g_pollable_source_new" shared="true">
         <return-type type="GSource*" owned="true">
@@ -15862,7 +16844,7 @@
           <parameter name="domain" type="guint32"/>
           <parameter name="code" type="gint"/>
           <parameter name="format" type="const-gchar*"/>
-          <parameter name="var_args" type="va_list"/>
+          <parameter name="arg6" type="va_list"/>
         </parameters>
       </method>
       <method name="SimpleAsyncReportGerrorInIdle" cname="g_simple_async_report_gerror_in_idle" shared="true">
@@ -16145,6 +17127,7 @@
       <constant value="unix::rdev" ctype="gchar*" gtype="gchar*" name="FILE_ATTRIBUTE_UNIX_RDEV"/>
       <constant value="unix::uid" ctype="gchar*" gtype="gchar*" name="FILE_ATTRIBUTE_UNIX_UID"/>
       <constant value="action" ctype="gchar*" gtype="gchar*" name="MENU_ATTRIBUTE_ACTION"/>
+      <constant value="action-namespace" ctype="gchar*" gtype="gchar*" name="MENU_ATTRIBUTE_ACTION_NAMESPACE"/>
       <constant value="label" ctype="gchar*" gtype="gchar*" name="MENU_ATTRIBUTE_LABEL"/>
       <constant value="target" ctype="gchar*" gtype="gchar*" name="MENU_ATTRIBUTE_TARGET"/>
       <constant value="section" ctype="gchar*" gtype="gchar*" name="MENU_LINK_SECTION"/>
